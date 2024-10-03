@@ -1,8 +1,5 @@
 package com.example.duncanclark.domain.usecase
 
-import com.example.duncanclark.domain.model.Places
-import com.example.duncanclark.domain.repository.Repository
-import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 interface GetNearbyPlacesUseCase {

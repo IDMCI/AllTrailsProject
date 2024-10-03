@@ -56,6 +56,7 @@ android {
 
 dependencies {
     implementation(project(":domain"))
+    implementation(project(":datasource"))
 
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.core.ktx)
