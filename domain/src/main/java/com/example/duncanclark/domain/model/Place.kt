@@ -1,8 +1,8 @@
 package com.example.duncanclark.domain.model
 
-typealias Places = List<Place>
+typealias PointsOfInterest = List<Poi>
 
-data class Place(
+data class Poi(
     val id: String,
     val displayName: String,
     val languageCode: String,

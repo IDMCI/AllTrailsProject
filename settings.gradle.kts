@@ -22,3 +22,4 @@ dependencyResolutionManagement {
 rootProject.name = "AllTrailsProject"
 include(":app")
 include(":domain")
+include(":datasource")
