@@ -1,9 +1,12 @@
 package com.example.duncanclark.datasource.model
 
+data class PlacesResponse(
+    val places: List<Place>,
+)
+
 data class Place(
     val name: String,
-    val rating: Float,
-    val displayName: DisplayName,
+    val rating: Double?,
     val servesLunch: Boolean,
 )
 

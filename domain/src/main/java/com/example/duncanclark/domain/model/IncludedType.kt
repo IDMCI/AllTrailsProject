@@ -1,7 +1,14 @@
 package com.example.duncanclark.domain.model
 
-typealias IncludedTypes = List<IncludedType>
+enum class IncludedType(val value: String) {
+    RESTAURANT("restaurant");
 
-enum class IncludedType(value: String) {
-    RESTAURANTS("restaurants")
+    // For extension function
+    companion object
+}
+
+fun IncludedType.Companion.nearbyPlacesLunch(): String {
+    return listOf(
+        IncludedType.RESTAURANT,
+    ).joinToString(separator = ",") { it.value }
 }

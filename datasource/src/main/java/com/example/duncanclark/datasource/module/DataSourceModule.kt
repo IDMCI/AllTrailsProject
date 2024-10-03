@@ -1,8 +1,11 @@
 package com.example.duncanclark.datasource.module
 
 import com.example.duncanclark.datasource.api.NearbyPlacesApiService
-import com.example.duncanclark.datasource.mapper.ApiPlacesToPlacesMapperImpl
+import com.example.duncanclark.datasource.mapper.PlacesResponseToPlacesMapperImpl
+import com.example.duncanclark.datasource.remote.NearbyPlacesApiDataSource
+import com.example.duncanclark.datasource.remote.NearbyPlacesApiDataSourceImpl
 import com.example.duncanclark.datasource.repository.NearbyPlacesRepositoryImpl
+import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
@@ -39,7 +42,7 @@ object DataSourceModule {
         okHttpClient: OkHttpClient,
     ): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("<Add Url here>")
+            .baseUrl("https://places.googleapis.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()
@@ -54,13 +57,19 @@ object DataSourceModule {
     @Reusable
     @Provides
     @Named("ApiPlacesToPlacesMapperImpl")
-    fun provideApiPlacesToPlacesMapperImpl() = ApiPlacesToPlacesMapperImpl()
+    fun provideApiPlacesToPlacesMapperImpl() = PlacesResponseToPlacesMapperImpl()
 
     @Singleton
     @Provides
+    fun provideNearbyPlacesApiDataSourceImpl(
+        apiService: NearbyPlacesApiService,
+    ): NearbyPlacesApiDataSource = NearbyPlacesApiDataSourceImpl(apiService, Gson())
+
+    @Reusable
+    @Provides
     @Named("NearbyPlacesRepositoryImpl")
     fun provideNearbyPlacesRepositoryImpl(
-        apiService: NearbyPlacesApiService,
-        mapper: ApiPlacesToPlacesMapperImpl
-    ) = NearbyPlacesRepositoryImpl(apiService, mapper)
+        dataSource: NearbyPlacesApiDataSource,
+        mapper: PlacesResponseToPlacesMapperImpl
+    ) = NearbyPlacesRepositoryImpl(dataSource, mapper)
 }

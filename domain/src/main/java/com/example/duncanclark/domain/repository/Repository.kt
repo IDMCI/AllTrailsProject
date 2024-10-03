@@ -1,5 +1,5 @@
 package com.example.duncanclark.domain.repository
 
-interface Repository<T> {
-    suspend fun getData(): T
+interface Repository<in T, out R> {
+    suspend fun getData(params: T): R
 }

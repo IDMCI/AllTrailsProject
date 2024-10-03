@@ -1,6 +1,6 @@
 package com.example.duncanclark.domain.module
 
-import com.example.duncanclark.domain.usecase.GetNearbyPlacesUseCaseImpl
+import com.example.duncanclark.domain.usecase.GetNearbyPlacesLunchUseCaseImpl
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
@@ -18,7 +18,7 @@ object DomainModule {
     fun provideGetNearbyPlacesUseCase(
 //        @Named("NearbyPlacesRepositoryImpl")
 //        repository: Repository<Flow<Result<Places>>>
-    ): GetNearbyPlacesUseCaseImpl {
-        return GetNearbyPlacesUseCaseImpl()
+    ): GetNearbyPlacesLunchUseCaseImpl {
+        return GetNearbyPlacesLunchUseCaseImpl()
     }
 }
