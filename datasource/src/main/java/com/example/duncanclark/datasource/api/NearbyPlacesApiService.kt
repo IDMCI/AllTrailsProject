@@ -1,7 +1,7 @@
 package com.example.duncanclark.datasource.api
 
 import com.example.duncanclark.datasource.model.PlacesResponse
-import com.example.duncanclark.domain.model.NearbyPlaceRequestParams
+import com.example.duncanclark.domain.model.params.NearbyPlaceRequestParams
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.Header
@@ -14,6 +14,6 @@ interface NearbyPlacesApiService {
     fun searchNearbyPlaces(
         @Header("X-Goog-Api-key") apiKey: String,
         @Header("X-Goog-FieldMask") fieldMask: String,
-        @Body request: NearbyPlaceRequestParams,
+        @Body bodyParams: NearbyPlaceRequestParams,
     ): Call<PlacesResponse>
 }

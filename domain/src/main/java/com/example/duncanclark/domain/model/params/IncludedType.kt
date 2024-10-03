@@ -1,4 +1,4 @@
-package com.example.duncanclark.domain.model
+package com.example.duncanclark.domain.model.params
 
 enum class IncludedType(val value: String) {
     RESTAURANT("restaurant");

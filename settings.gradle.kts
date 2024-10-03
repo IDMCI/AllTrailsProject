@@ -23,3 +23,5 @@ rootProject.name = "AllTrailsProject"
 include(":app")
 include(":domain")
 include(":datasource")
+include(":ui_feature_search_nearby_places")
+include(":common")

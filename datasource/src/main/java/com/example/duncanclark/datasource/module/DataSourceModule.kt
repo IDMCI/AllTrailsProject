@@ -1,7 +1,7 @@
 package com.example.duncanclark.datasource.module
 
 import com.example.duncanclark.datasource.api.NearbyPlacesApiService
-import com.example.duncanclark.datasource.mapper.PlacesResponseToPlacesMapperImpl
+import com.example.duncanclark.datasource.mapper.LunchPlacesMapperImpl
 import com.example.duncanclark.datasource.remote.NearbyPlacesApiDataSource
 import com.example.duncanclark.datasource.remote.NearbyPlacesApiDataSourceImpl
 import com.example.duncanclark.datasource.repository.NearbyPlacesRepositoryImpl
@@ -57,19 +57,19 @@ object DataSourceModule {
     @Reusable
     @Provides
     @Named("ApiPlacesToPlacesMapperImpl")
-    fun provideApiPlacesToPlacesMapperImpl() = PlacesResponseToPlacesMapperImpl()
+    fun provideApiPlacesToPlacesMapperImpl() = LunchPlacesMapperImpl()
 
     @Singleton
     @Provides
     fun provideNearbyPlacesApiDataSourceImpl(
         apiService: NearbyPlacesApiService,
-    ): NearbyPlacesApiDataSource = NearbyPlacesApiDataSourceImpl(apiService, Gson())
+    ): NearbyPlacesApiDataSource = NearbyPlacesApiDataSourceImpl(apiService)
 
     @Reusable
     @Provides
     @Named("NearbyPlacesRepositoryImpl")
     fun provideNearbyPlacesRepositoryImpl(
         dataSource: NearbyPlacesApiDataSource,
-        mapper: PlacesResponseToPlacesMapperImpl
+        mapper: LunchPlacesMapperImpl
     ) = NearbyPlacesRepositoryImpl(dataSource, mapper)
 }
