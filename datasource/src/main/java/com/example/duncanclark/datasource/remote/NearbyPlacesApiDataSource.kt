@@ -2,25 +2,22 @@ package com.example.duncanclark.datasource.remote
 
 import com.example.duncanclark.datasource.api.NearbyPlacesApiService
 import com.example.duncanclark.datasource.model.PlacesResponse
-import com.example.duncanclark.domain.model.NearbyPlaceParams
-import com.google.gson.Gson
+import com.example.duncanclark.domain.model.params.ParamsNearbyPlace
 import retrofit2.await
 import javax.inject.Inject
 
 interface NearbyPlacesApiDataSource {
-    suspend fun searchNearbyPlaces(params: NearbyPlaceParams): PlacesResponse
+    suspend fun searchNearbyPlaces(params: ParamsNearbyPlace): PlacesResponse
 }
 
 class NearbyPlacesApiDataSourceImpl @Inject constructor(
     private val nearbyPlacesApiService: NearbyPlacesApiService,
-    private val gson: Gson,
 ): NearbyPlacesApiDataSource {
-    override suspend fun searchNearbyPlaces(params: NearbyPlaceParams): PlacesResponse {
-        val fieldMask = gson.toJson(params.fieldMasks)
+    override suspend fun searchNearbyPlaces(params: ParamsNearbyPlace): PlacesResponse {
         return nearbyPlacesApiService.searchNearbyPlaces(
             apiKey = "<insert api key here>",
-            fieldMask = fieldMask,
-            request = params.bodyParams
+            fieldMask = params.fieldMasks,
+            bodyParams = params.bodyParams
         ).await()
     }
 }

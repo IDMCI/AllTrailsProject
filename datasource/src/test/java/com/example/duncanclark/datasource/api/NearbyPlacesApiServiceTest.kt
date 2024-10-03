@@ -2,10 +2,13 @@ package com.example.duncanclark.datasource.api
 
 import com.example.duncanclark.datasource.model.Place
 import com.example.duncanclark.datasource.model.PlacesResponse
-import com.example.duncanclark.domain.model.FieldMask
-import com.example.duncanclark.domain.model.IncludedType
-import com.example.duncanclark.domain.model.NearbyPlaceRequestParams
-import com.example.duncanclark.domain.model.nearbyPlacesLunch
+import com.example.duncanclark.domain.model.params.Center
+import com.example.duncanclark.domain.model.params.Circle
+import com.example.duncanclark.domain.model.params.FieldMask
+import com.example.duncanclark.domain.model.params.IncludedType
+import com.example.duncanclark.domain.model.params.LocationRestriction
+import com.example.duncanclark.domain.model.params.NearbyPlaceRequestParams
+import com.example.duncanclark.domain.model.params.nearbyPlacesLunch
 import kotlinx.coroutines.test.runTest
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -22,10 +25,15 @@ import java.util.concurrent.TimeUnit
 class NearbyPlacesApiServiceTest {
 
     // Stub Data
-    private val fieldMasks = FieldMask.Companion.nearbyPlacesLunch()
-    private val requestParams = NearbyPlaceRequestParams(
+    private val fieldMasks = FieldMask.nearbyPlacesLunch()
+    private val lat = 40.479822043320816
+    private val lng = -104.89954079298904
+    private val request = NearbyPlaceRequestParams(
+        locationRestriction = LocationRestriction(
+            circle = Circle(Center(lat, lng))
+        ),
         includedTypes = IncludedType.nearbyPlacesLunch(),
-        maxResultCount = 10,
+        maxResultCount = 1
     )
 
     // Retrofit, OkHttpClient
@@ -57,7 +65,7 @@ class NearbyPlacesApiServiceTest {
             val results = subject.searchNearbyPlaces(
                 apiKey = "<insert api key>",
                 fieldMask = fieldMasks,
-                request = requestParams
+                bodyParams = request
             ).await()
             val actual = results.places.first()
             assertEquals(expected.places.first(), actual)
@@ -75,11 +83,11 @@ class NearbyPlacesApiServiceTest {
         override fun searchNearbyPlaces(
             apiKey: String,
             fieldMask: String,
-            request: NearbyPlaceRequestParams
+            bodyParams: NearbyPlaceRequestParams
         ): Call<PlacesResponse> = service.searchNearbyPlaces(
             apiKey,
             fieldMask,
-            request,
+            bodyParams,
         )
     }
 

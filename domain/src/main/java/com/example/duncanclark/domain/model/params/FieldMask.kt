@@ -1,4 +1,4 @@
-package com.example.duncanclark.domain.model
+package com.example.duncanclark.domain.model.params
 
 enum class FieldMask(val value: String) {
     DISPLAY_NAME("places.displayName"),
