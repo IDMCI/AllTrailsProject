@@ -1,14 +1,14 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
-    id("kotlin-parcelize")
     alias(libs.plugins.dagger.hilt)
     alias(libs.plugins.devtools.ksp)
+    id("kotlin-parcelize")
 }
 
 android {
     namespace = "com.example.duncanclark.domain"
-    compileSdk = 35
+    compileSdk = 34
 
     defaultConfig {
         minSdk = 28
@@ -39,12 +39,12 @@ android {
 }
 
 dependencies {
-    implementation(libs.dagger.hilt)
-    ksp(libs.dagger.hilt.compiler)
-
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
+    implementation(libs.dagger.hilt)
+    ksp(libs.dagger.hilt.compiler)
+
     implementation(libs.kotlinx.serialization.json)
 
     testImplementation(libs.junit)

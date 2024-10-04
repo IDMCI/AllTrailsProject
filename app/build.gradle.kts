@@ -15,7 +15,7 @@ android {
     defaultConfig {
         applicationId = "com.example.duncanclark.alltrailsproject"
         minSdk = 28
-        targetSdk = 35
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -38,6 +38,9 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
+    hilt {
+        enableAggregatingTask = true
+    }
     kotlinOptions {
         jvmTarget = "17"
     }
@@ -52,11 +55,20 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+    tasks.withType<JavaCompile> {
+        options.compilerArgs.add("-Xlint:deprecation")
+    }
 }
 
 dependencies {
+    implementation(project(":common"))
     implementation(project(":domain"))
     implementation(project(":datasource"))
+    implementation(project(":ui_feature_search_nearby_places"))
+
+    implementation(libs.dagger.hilt)
+    ksp(libs.dagger.hilt.compiler)
+    implementation(libs.androidx.hilt.navigation)
 
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.core.ktx)
@@ -68,9 +80,7 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.navigation.compose)
-    implementation(libs.dagger.hilt)
-    ksp(libs.dagger.hilt.compiler)
-    implementation(libs.androidx.hilt.navigation)
+    implementation(libs.kotlin.stdlib)
 
     implementation(libs.retrofit)
     implementation(libs.kotlinx.serialization.json)

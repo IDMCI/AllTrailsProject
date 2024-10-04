@@ -1,14 +1,14 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
-    id("kotlin-parcelize")
     alias(libs.plugins.dagger.hilt)
     alias(libs.plugins.devtools.ksp)
+    id("kotlin-parcelize")
 }
 
 android {
     namespace = "com.example.duncanclark.datasource"
-    compileSdk = 35
+    compileSdk = 34
 
     defaultConfig {
         minSdk = 28
@@ -41,15 +41,18 @@ android {
 dependencies {
     implementation(project(":domain"))
 
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+
+    implementation(libs.dagger.hilt)
+    ksp(libs.dagger.hilt.compiler)
+
     implementation(libs.retrofit)
     implementation(libs.retrofit.gson)
     implementation(libs.retrofit.serialization)
     implementation(libs.logging.interceptor)
-    implementation(libs.dagger.hilt)
-    ksp(libs.dagger.hilt.compiler)
 
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
+
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

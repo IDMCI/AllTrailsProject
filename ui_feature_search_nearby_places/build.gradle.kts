@@ -8,7 +8,7 @@ plugins {
 
 android {
     namespace = "com.example.duncanclark.ui_feature_search_nearby_places"
-    compileSdk = 35
+    compileSdk = 34
 
     defaultConfig {
         minSdk = 28
@@ -36,6 +36,9 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
     }
+    hilt {
+        enableAggregatingTask = true
+    }
 }
 
 dependencies {
@@ -44,6 +47,8 @@ dependencies {
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
+    implementation(libs.dagger.hilt)
+    ksp(libs.dagger.hilt.compiler)
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.material3)
@@ -52,8 +57,6 @@ dependencies {
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.tooling.preview)
 
-    implementation(libs.dagger.hilt)
-    ksp(libs.dagger.hilt.compiler)
     implementation(libs.androidx.hilt.navigation)
 
     testImplementation(libs.junit)

@@ -5,12 +5,15 @@ import com.example.duncanclark.datasource.mapper.LunchPlacesMapperImpl
 import com.example.duncanclark.datasource.remote.NearbyPlacesApiDataSource
 import com.example.duncanclark.datasource.remote.NearbyPlacesApiDataSourceImpl
 import com.example.duncanclark.datasource.repository.NearbyPlacesRepositoryImpl
-import com.google.gson.Gson
+import com.example.duncanclark.domain.model.params.ParamsNearbyPlace
+import com.example.duncanclark.domain.model.ui.Places
+import com.example.duncanclark.domain.repository.Repository
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.flow.Flow
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -22,6 +25,16 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object DataSourceModule {
+
+    @Singleton
+    @Provides
+    @Named("NearbyPlacesRepositoryImpl")
+    fun provideNearbyPlacesRepositoryImpl(
+        dataSource: NearbyPlacesApiDataSource,
+        mapper: LunchPlacesMapperImpl
+    ): Repository<ParamsNearbyPlace, Flow<Result<Places>>> {
+        return NearbyPlacesRepositoryImpl(dataSource, mapper)
+    }
 
     @Singleton
     @Provides
@@ -56,7 +69,6 @@ object DataSourceModule {
 
     @Reusable
     @Provides
-    @Named("ApiPlacesToPlacesMapperImpl")
     fun provideApiPlacesToPlacesMapperImpl() = LunchPlacesMapperImpl()
 
     @Singleton
@@ -64,12 +76,4 @@ object DataSourceModule {
     fun provideNearbyPlacesApiDataSourceImpl(
         apiService: NearbyPlacesApiService,
     ): NearbyPlacesApiDataSource = NearbyPlacesApiDataSourceImpl(apiService)
-
-    @Reusable
-    @Provides
-    @Named("NearbyPlacesRepositoryImpl")
-    fun provideNearbyPlacesRepositoryImpl(
-        dataSource: NearbyPlacesApiDataSource,
-        mapper: LunchPlacesMapperImpl
-    ) = NearbyPlacesRepositoryImpl(dataSource, mapper)
 }
