@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.dagger.hilt)
+    alias(libs.plugins.devtools.ksp)
 }
 
 android {
@@ -30,9 +32,14 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+    hilt {
+        enableAggregatingTask = true
+    }
 }
 
 dependencies {
+    implementation(libs.dagger.hilt)
+    ksp(libs.dagger.hilt.compiler)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

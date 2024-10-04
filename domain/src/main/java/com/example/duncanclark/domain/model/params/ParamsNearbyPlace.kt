@@ -1,33 +1,28 @@
 package com.example.duncanclark.domain.model.params
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
+import kotlinx.serialization.SerialName
 
 data class ParamsNearbyPlace(
     val fieldMasks: String,
     val bodyParams: NearbyPlaceRequestParams,
 )
 
-@Parcelize
 data class NearbyPlaceRequestParams(
-    val locationRestriction: LocationRestriction,
-    val includedTypes: String,
-    val maxResultCount: Int = 10,
-): Parcelable
+    @SerialName("locationRestriction") val locationRestriction: LocationRestriction,
+    @SerialName("includedTypes") val includedTypes: String,
+    @SerialName("maxResultCount") val maxResultCount: Int = 10,
+)
 
-@Parcelize
 data class LocationRestriction(
-    val circle: Circle,
-): Parcelable
+    @SerialName("circle") val circle: Circle,
+)
 
-@Parcelize
 data class Circle (
-    val center: Center,
-    val radius: Double = 500.0,
-): Parcelable
+    @SerialName("center") val center: Center,
+    @SerialName("radius") val radius: Double = 500.0,
+)
 
-@Parcelize
 data class Center(
-    val latitude: Double,
-    val longitude: Double,
-): Parcelable
+    @SerialName("latitude") val latitude: Double,
+    @SerialName("latitude") val longitude: Double,
+)

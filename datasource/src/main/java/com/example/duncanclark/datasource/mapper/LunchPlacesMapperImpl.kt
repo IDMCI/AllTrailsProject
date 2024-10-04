@@ -10,9 +10,11 @@ class LunchPlacesMapperImpl @Inject constructor(): Mapper<PlacesResponse, LunchP
     override operator fun invoke(input: PlacesResponse): LunchPlaces {
         return input.places.map { place ->
             Place.LunchPlace(
-                id = place.name,
+                placeId = place.name,
+                displayName = "{restaurant}",
                 rating = place.rating,
                 servesLunch = place.servesLunch,
+                languageCode = null,
             )
         }
     }
