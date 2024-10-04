@@ -8,7 +8,7 @@ data class Place(
     val name: String,
     val rating: Double?,
     val displayName: DisplayName,
-    val servesLunch: Boolean,
+    val servesLunch: Boolean?, // Only returned on NearbyPlaces
 )
 
 data class DisplayName(
