@@ -8,18 +8,18 @@ import com.example.duncanclark.domain.model.params.IncludedType
 import com.example.duncanclark.domain.model.params.LocationRestriction
 import com.example.duncanclark.domain.model.params.BodyParamsForNearbyPlaces
 import com.example.duncanclark.domain.model.params.ParamsForNearbyPlaces
-import com.example.duncanclark.domain.model.params.nearbyPlacesLunch
+import com.example.duncanclark.domain.model.params.nearbyPlacesForLunch
 import javax.inject.Inject
 
-class ParamsNearbyPlaceMapperImpl @Inject constructor()
+class ParamsNearbyPlacesMapperImpl @Inject constructor()
     : Mapper<Pair<Double, Double>, ParamsForNearbyPlaces> {
 
     override fun invoke(input: Pair<Double, Double>): ParamsForNearbyPlaces {
         return ParamsForNearbyPlaces(
-            fieldMasks = FieldMask.nearbyPlacesLunch(),
+            fieldMasks = FieldMask.nearbyPlacesForLunch(),
             bodyParams = BodyParamsForNearbyPlaces(
                 locationRestriction = createLocationRestriction(input),
-                includedTypes = IncludedType.nearbyPlacesLunch(),
+                includedTypes = IncludedType.nearbyPlacesForLunch(),
             )
         )
     }

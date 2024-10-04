@@ -7,7 +7,7 @@ enum class IncludedType(val value: String) {
     companion object
 }
 
-fun IncludedType.Companion.nearbyPlacesLunch(): String {
+fun IncludedType.Companion.nearbyPlacesForLunch(): String {
     return listOf(
         IncludedType.RESTAURANT,
     ).joinToString(separator = ",") { it.value }

@@ -9,7 +9,7 @@ import com.example.duncanclark.domain.model.params.FieldMask
 import com.example.duncanclark.domain.model.params.IncludedType
 import com.example.duncanclark.domain.model.params.LocationRestriction
 import com.example.duncanclark.domain.model.params.BodyParamsForNearbyPlaces
-import com.example.duncanclark.domain.model.params.nearbyPlacesLunch
+import com.example.duncanclark.domain.model.params.nearbyPlacesForLunch
 import kotlinx.coroutines.test.runTest
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -26,14 +26,14 @@ import java.util.concurrent.TimeUnit
 class NearbyPlacesApiServiceTest {
 
     // Stub Data
-    private val fieldMasks = FieldMask.nearbyPlacesLunch()
+    private val fieldMasks = FieldMask.nearbyPlacesForLunch()
     private val lat = 40.479822043320816
     private val lng = -104.89954079298904
     private val request = BodyParamsForNearbyPlaces(
         locationRestriction = LocationRestriction(
             circle = Circle(Center(lat, lng))
         ),
-        includedTypes = IncludedType.nearbyPlacesLunch(),
+        includedTypes = IncludedType.nearbyPlacesForLunch(),
         maxResultCount = 1
     )
 

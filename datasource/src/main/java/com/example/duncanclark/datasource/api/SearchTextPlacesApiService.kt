@@ -8,7 +8,7 @@ import retrofit2.http.Header
 import retrofit2.http.Headers
 import retrofit2.http.POST
 
-interface SearchTextApiService {
+interface SearchTextPlacesApiService {
     @POST("v1/places:searchText")
     @Headers("Content-Type: application/json")
     fun searchText(
