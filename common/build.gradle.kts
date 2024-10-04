@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.example.duncanclark.common"
-    compileSdk = 35
+    compileSdk = 34
 
     defaultConfig {
         minSdk = 28

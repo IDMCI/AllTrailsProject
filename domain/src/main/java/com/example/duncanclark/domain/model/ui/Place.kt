@@ -2,13 +2,22 @@ package com.example.duncanclark.domain.model.ui
 
 typealias Places = List<Place>
 typealias LunchPlaces = List<Place.LunchPlace>
+typealias PlaceId = String
 
-sealed class Place {
+sealed class Place: BasePlace {
     data class LunchPlace(
-        val id: String,
-        val displayName: String = "",
-        val languageCode: String = "",
+        override val placeId: PlaceId,
+        override val displayName: String,
         val rating: Double?,
         val servesLunch: Boolean,
-    ): Place()
+        override val languageCode: String?,
+        override val isSelected: Boolean = false,
+    ) : Place()
+}
+
+internal interface BasePlace {
+    val placeId: PlaceId
+    val displayName: String
+    val languageCode: String?
+    val isSelected: Boolean
 }

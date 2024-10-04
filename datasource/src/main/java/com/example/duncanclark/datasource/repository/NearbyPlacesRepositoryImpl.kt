@@ -11,6 +11,10 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
+interface NearbyPlacesRepository {
+    suspend fun getData(params: ParamsNearbyPlace): Flow<Result<Places>>
+}
+
 class NearbyPlacesRepositoryImpl @Inject constructor(
     private val apiDataSource: NearbyPlacesApiDataSource,
     private val mapper: Mapper<PlacesResponse, LunchPlaces>,
