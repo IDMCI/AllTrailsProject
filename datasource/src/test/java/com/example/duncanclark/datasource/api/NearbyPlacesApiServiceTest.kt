@@ -1,5 +1,6 @@
 package com.example.duncanclark.datasource.api
 
+import com.example.duncanclark.datasource.BuildConfig
 import com.example.duncanclark.datasource.api.builders.RetrofitBuildersForTesting
 import com.example.duncanclark.datasource.model.DisplayName
 import com.example.duncanclark.datasource.model.Place
@@ -66,7 +67,7 @@ class NearbyPlacesApiServiceTest {
 
         try {
             val results = subject.getNearbyPlaces(
-                apiKey = "",
+                apiKey = BuildConfig.MAPS_API_KEY,
                 fieldMask = fieldMasks,
                 bodyParams = request
             ).await()

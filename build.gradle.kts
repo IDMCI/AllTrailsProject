@@ -11,5 +11,6 @@ plugins {
 buildscript {
     dependencies {
         classpath(libs.dagger.hilt.gradle)
+        classpath(libs.secrets.gradle.plugin)
     }
 }
