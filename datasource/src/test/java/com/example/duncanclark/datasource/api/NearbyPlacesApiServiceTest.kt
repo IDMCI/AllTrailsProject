@@ -63,7 +63,7 @@ class NearbyPlacesApiServiceTest {
 
         try {
             val results = subject.searchNearbyPlaces(
-                apiKey = "<insert api key>",
+                apiKey = "AIzaSyAvAaPcSL1SNPUguENa_p2P-SuRaxGUduw",
                 fieldMask = fieldMasks,
                 bodyParams = request
             ).await()
