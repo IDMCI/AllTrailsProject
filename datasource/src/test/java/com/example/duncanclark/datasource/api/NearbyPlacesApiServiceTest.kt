@@ -1,5 +1,6 @@
 package com.example.duncanclark.datasource.api
 
+import com.example.duncanclark.datasource.model.DisplayName
 import com.example.duncanclark.datasource.model.Place
 import com.example.duncanclark.datasource.model.PlacesResponse
 import com.example.duncanclark.domain.model.params.Center
@@ -7,7 +8,7 @@ import com.example.duncanclark.domain.model.params.Circle
 import com.example.duncanclark.domain.model.params.FieldMask
 import com.example.duncanclark.domain.model.params.IncludedType
 import com.example.duncanclark.domain.model.params.LocationRestriction
-import com.example.duncanclark.domain.model.params.NearbyPlaceRequestParams
+import com.example.duncanclark.domain.model.params.BodyParamsForNearbyPlaces
 import com.example.duncanclark.domain.model.params.nearbyPlacesLunch
 import kotlinx.coroutines.test.runTest
 import okhttp3.OkHttpClient
@@ -28,7 +29,7 @@ class NearbyPlacesApiServiceTest {
     private val fieldMasks = FieldMask.nearbyPlacesLunch()
     private val lat = 40.479822043320816
     private val lng = -104.89954079298904
-    private val request = NearbyPlaceRequestParams(
+    private val request = BodyParamsForNearbyPlaces(
         locationRestriction = LocationRestriction(
             circle = Circle(Center(lat, lng))
         ),
@@ -54,16 +55,20 @@ class NearbyPlacesApiServiceTest {
         val expected = PlacesResponse(
             listOf(
                 Place(
-                    name="places/ChIJiZF-6jSxbocRwCezM9uGslE",
-                    rating=4.5,
-                    servesLunch=true
+                    name = "places/ChIJzzCIrsKxbocREImaC3XX0lU",
+                    rating = 3.2,
+                    servesLunch = true,
+                    displayName = DisplayName(
+                        text = "McDonald's",
+                        languageCode = "en"
+                    )
                 )
             )
         )
 
         try {
-            val results = subject.searchNearbyPlaces(
-                apiKey = "<insert api key here>",
+            val results = subject.getNearbyPlaces(
+                apiKey = "",
                 fieldMask = fieldMasks,
                 bodyParams = request
             ).await()
@@ -80,11 +85,11 @@ class NearbyPlacesApiServiceTest {
 
         private val service by lazy { retrofit.create(NearbyPlacesApiService::class.java) }
 
-        override fun searchNearbyPlaces(
+        override fun getNearbyPlaces(
             apiKey: String,
             fieldMask: String,
-            bodyParams: NearbyPlaceRequestParams
-        ): Call<PlacesResponse> = service.searchNearbyPlaces(
+            bodyParams: BodyParamsForNearbyPlaces
+        ): Call<PlacesResponse> = service.getNearbyPlaces(
             apiKey,
             fieldMask,
             bodyParams,

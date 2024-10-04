@@ -1,23 +1,25 @@
 package com.example.duncanclark.datasource.repository
 
 import com.example.duncanclark.datasource.model.PlacesResponse
-import com.example.duncanclark.datasource.remote.NearbyPlacesApiDataSource
+import com.example.duncanclark.datasource.remote.SearchTextApiDataSource
 import com.example.duncanclark.domain.common.mapper.Mapper
+import com.example.duncanclark.domain.model.params.ParamsForSearchText
 import com.example.duncanclark.domain.model.ui.LunchPlaces
-import com.example.duncanclark.domain.model.params.ParamsForNearbyPlaces
 import com.example.duncanclark.domain.model.ui.Places
 import com.example.duncanclark.domain.repository.Repository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class NearbyPlacesRepositoryImpl @Inject constructor(
-    private val apiDataSource: NearbyPlacesApiDataSource,
+class SearchNearbyPlacesRepositoryImpl @Inject constructor(
+    private val apiDataSource: SearchTextApiDataSource,
     private val mapper: Mapper<PlacesResponse, LunchPlaces>,
-): Repository<ParamsForNearbyPlaces, Flow<Result<Places>>> {
-    override suspend fun execute(params: ParamsForNearbyPlaces): Flow<Result<Places>> = flow {
+): Repository<ParamsForSearchText, Flow<Result<Places>>> {
+    override suspend fun execute(
+        params: ParamsForSearchText
+    ): Flow<Result<Places>> = flow {
         try {
-            val apiPlaces = apiDataSource.getNearbyPlaces(params)
+            val apiPlaces = apiDataSource.search(params)
 
             emit(Result.success(mapper(apiPlaces)))
         } catch (e: Exception) {

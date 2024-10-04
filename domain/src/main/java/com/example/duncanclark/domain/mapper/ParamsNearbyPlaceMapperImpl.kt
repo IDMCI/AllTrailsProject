@@ -6,21 +6,20 @@ import com.example.duncanclark.domain.model.params.Circle
 import com.example.duncanclark.domain.model.params.FieldMask
 import com.example.duncanclark.domain.model.params.IncludedType
 import com.example.duncanclark.domain.model.params.LocationRestriction
-import com.example.duncanclark.domain.model.params.NearbyPlaceRequestParams
-import com.example.duncanclark.domain.model.params.ParamsNearbyPlace
+import com.example.duncanclark.domain.model.params.BodyParamsForNearbyPlaces
+import com.example.duncanclark.domain.model.params.ParamsForNearbyPlaces
 import com.example.duncanclark.domain.model.params.nearbyPlacesLunch
 import javax.inject.Inject
 
 class ParamsNearbyPlaceMapperImpl @Inject constructor()
-    : Mapper<Pair<Double, Double>, ParamsNearbyPlace> {
+    : Mapper<Pair<Double, Double>, ParamsForNearbyPlaces> {
 
-    override fun invoke(input: Pair<Double, Double>): ParamsNearbyPlace {
-        return ParamsNearbyPlace(
+    override fun invoke(input: Pair<Double, Double>): ParamsForNearbyPlaces {
+        return ParamsForNearbyPlaces(
             fieldMasks = FieldMask.nearbyPlacesLunch(),
-            bodyParams = NearbyPlaceRequestParams(
+            bodyParams = BodyParamsForNearbyPlaces(
                 locationRestriction = createLocationRestriction(input),
                 includedTypes = IncludedType.nearbyPlacesLunch(),
-                maxResultCount = 10,
             )
         )
     }

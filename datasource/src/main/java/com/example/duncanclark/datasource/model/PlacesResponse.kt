@@ -7,6 +7,7 @@ data class PlacesResponse(
 data class Place(
     val name: String,
     val rating: Double?,
+    val displayName: DisplayName,
     val servesLunch: Boolean,
 )
 
