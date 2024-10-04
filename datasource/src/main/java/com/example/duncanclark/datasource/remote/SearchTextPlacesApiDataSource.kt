@@ -1,5 +1,6 @@
 package com.example.duncanclark.datasource.remote
 
+import com.example.duncanclark.datasource.BuildConfig
 import com.example.duncanclark.datasource.api.SearchTextPlacesApiService
 import com.example.duncanclark.datasource.model.PlacesResponse
 import com.example.duncanclark.domain.model.params.ParamsForSearchTextPlaces
@@ -15,7 +16,7 @@ class SearchTextApiDataSourceImpl @Inject constructor(
 ): SearchTextApiDataSource {
     override suspend fun search(params: ParamsForSearchTextPlaces): PlacesResponse {
         return searchTextPlacesApiService.searchText(
-            apiKey = "",
+            apiKey = BuildConfig.MAPS_API_KEY,
             fieldMask = params.fieldMasks,
             bodyParams = params.bodyParams
         ).await()

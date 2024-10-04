@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.dagger.hilt)
     alias(libs.plugins.devtools.ksp)
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
     kotlin("plugin.serialization") version("1.9.22")
 }
 
@@ -45,6 +46,7 @@ android {
         jvmTarget = "17"
     }
     buildFeatures {
+        buildConfig = true
         compose = true
     }
     composeOptions {
@@ -54,6 +56,22 @@ android {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
+    }
+    secrets {
+        // To add your Maps API key to this project:
+        // 1. If the secrets.properties file does not exist, create it in the same folder as the local.properties file.
+        // 2. Add this line, where YOUR_API_KEY is your API key:
+        //        MAPS_API_KEY=YOUR_API_KEY
+        propertiesFileName = "secrets.properties"
+
+        // A properties file containing default secret values. This file can be
+        // checked in version control.
+        defaultPropertiesFileName = "local.properties"
+
+        // Configure which keys should be ignored by the plugin by providing regular expressions.
+        // "sdk.dir" is ignored by default.
+        ignoreList.add("keyToIgnore") // Ignore the key "keyToIgnore"
+        ignoreList.add("sdk.*")       // Ignore all keys matching the regexp "sdk.*"
     }
     tasks.withType<JavaCompile> {
         options.compilerArgs.add("-Xlint:deprecation")
@@ -81,6 +99,7 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.kotlin.stdlib)
+    implementation(libs.google.maps)
 
     implementation(libs.retrofit)
     implementation(libs.kotlinx.serialization.json)

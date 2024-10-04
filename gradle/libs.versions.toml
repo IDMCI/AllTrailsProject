@@ -9,6 +9,7 @@ coreKtx = "1.13.1"
 coroutines-test = "1.9.0"
 devtoolsKsp = "2.0.20-1.0.25"
 hilt = "2.52"
+google-maps = "19.0.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 kotlin = "2.0.20"
@@ -20,6 +21,8 @@ mockitoKotlin = "5.4.0"
 mockk = "1.13.12"
 retrofit2 = "2.11.0"
 retrofit2KotlinxSerializationConverter = "1.0.0"
+secretsGradlePlugin = "1.1.0"
+secretsGradlePluginVersion = "2.0.1"
 
 [libraries]
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
@@ -41,6 +44,7 @@ coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-
 dagger-hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 dagger-hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt"}
 dagger-hilt-gradle = { group = "com.google.dagger",  name = "hilt-android-gradle-plugin", version.ref = "hilt" }
+google-maps = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "google-maps" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "logging-intereceptor" }
 kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin"}
@@ -52,6 +56,7 @@ retrofit-mock = { group = "com.squareup.retrofit2", name = "retrofit-mock", vers
 mockito-core = { group = "org.mockito", name = "mockito-core", version.ref = "mockitoCore" }
 mockito-kotlin = { group = "org.mockito.kotlin", name = "mockito-kotlin", version.ref = "mockitoKotlin" }
 mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
+secrets-gradle-plugin = { module = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin", version.ref = "secretsGradlePluginVersion" }
 
 [plugins]
 android-library = { id = "com.android.library", version.ref = "agp" }
