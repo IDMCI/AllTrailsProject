@@ -15,7 +15,7 @@ class NearbyPlacesApiDataSourceImpl @Inject constructor(
 ): NearbyPlacesApiDataSource {
     override suspend fun searchNearbyPlaces(params: ParamsNearbyPlace): PlacesResponse {
         return nearbyPlacesApiService.searchNearbyPlaces(
-            apiKey = "AIzaSyAvAaPcSL1SNPUguENa_p2P-SuRaxGUduw",
+            apiKey = "<insert api key here>",
             fieldMask = params.fieldMasks,
             bodyParams = params.bodyParams
         ).await()
