@@ -3,6 +3,7 @@ package com.example.duncanclark.ui_feature_search_nearby_places.composable.compo
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
@@ -18,17 +19,21 @@ import com.example.duncanclark.domain.model.ui.Place
 @Composable
 fun RestaurantSearchResultsRow(
     modifier: Modifier,
-    place: Place,
+    place: Place.LunchPlace,
 ) {
     Card(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(12.dp)
+        modifier = modifier.fillMaxWidth()
     ) {
-        Column {
+        Column(
+            modifier = Modifier.padding(12.dp)
+        ) {
+            Text(
+                text = place.placeId,
+                fontSize = 16.sp,
+                color = MaterialTheme.colorScheme.onPrimaryContainer
+            )
             // Display name
             Text(
-                modifier = Modifier.weight(1F),
                 text = place.displayName,
                 fontWeight = FontWeight.Bold,
                 fontSize = 16.sp,
@@ -64,7 +69,7 @@ fun RestaurantSearchResultsRow(
             }
             Text(
                 modifier = Modifier.padding(horizontal = 2.dp),
-                text = "{ supporting text }",
+                text = "{supporting text}",
                 style = MaterialTheme.typography.bodyMedium,
                 fontWeight = FontWeight.Light,
                 fontSize = 13.sp,

@@ -1,11 +1,16 @@
 package com.example.duncanclark.datasource.module
 
 import com.example.duncanclark.datasource.api.NearbyPlacesApiService
+import com.example.duncanclark.datasource.api.SearchTextApiService
 import com.example.duncanclark.datasource.mapper.LunchPlacesMapperImpl
 import com.example.duncanclark.datasource.remote.NearbyPlacesApiDataSource
 import com.example.duncanclark.datasource.remote.NearbyPlacesApiDataSourceImpl
+import com.example.duncanclark.datasource.remote.SearchTextApiDataSource
+import com.example.duncanclark.datasource.remote.SearchTextApiDataSourceImpl
 import com.example.duncanclark.datasource.repository.NearbyPlacesRepositoryImpl
-import com.example.duncanclark.domain.model.params.ParamsNearbyPlace
+import com.example.duncanclark.datasource.repository.SearchNearbyPlacesRepositoryImpl
+import com.example.duncanclark.domain.model.params.ParamsForNearbyPlaces
+import com.example.duncanclark.domain.model.params.ParamsForSearchText
 import com.example.duncanclark.domain.model.ui.Places
 import com.example.duncanclark.domain.repository.Repository
 import dagger.Module
@@ -32,8 +37,18 @@ object DataSourceModule {
     fun provideNearbyPlacesRepositoryImpl(
         dataSource: NearbyPlacesApiDataSource,
         mapper: LunchPlacesMapperImpl
-    ): Repository<ParamsNearbyPlace, Flow<Result<Places>>> {
+    ): Repository<ParamsForNearbyPlaces, Flow<Result<Places>>> {
         return NearbyPlacesRepositoryImpl(dataSource, mapper)
+    }
+
+    @Singleton
+    @Provides
+    @Named("SearchNearbyPlacesRepositoryImpl")
+    fun provideSearchNearbyPlacesRepositoryImpl(
+        dataSource: SearchTextApiDataSource,
+        mapper: LunchPlacesMapperImpl
+    ): Repository<ParamsForSearchText, Flow<Result<Places>>> {
+        return SearchNearbyPlacesRepositoryImpl(dataSource, mapper)
     }
 
     @Singleton
@@ -76,4 +91,10 @@ object DataSourceModule {
     fun provideNearbyPlacesApiDataSourceImpl(
         apiService: NearbyPlacesApiService,
     ): NearbyPlacesApiDataSource = NearbyPlacesApiDataSourceImpl(apiService)
+
+    @Singleton
+    @Provides
+    fun provideSearchTextApiDataSourceImpl(
+        apiService: SearchTextApiService,
+    ): SearchTextApiDataSource = SearchTextApiDataSourceImpl(apiService)
 }

@@ -11,10 +11,10 @@ class LunchPlacesMapperImpl @Inject constructor(): Mapper<PlacesResponse, LunchP
         return input.places.map { place ->
             Place.LunchPlace(
                 placeId = place.name,
-                displayName = place.name,
+                displayName = place.displayName.text,
                 rating = place.rating,
                 servesLunch = place.servesLunch,
-                languageCode = null,
+                languageCode = place.displayName.languageCode,
             )
         }
     }

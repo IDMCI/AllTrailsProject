@@ -1,8 +1,7 @@
 package com.example.duncanclark.domain.module
 
 import com.example.duncanclark.domain.mapper.ParamsNearbyPlaceMapperImpl
-import com.example.duncanclark.domain.model.ui.LunchPlaces
-import com.example.duncanclark.domain.model.params.ParamsNearbyPlace
+import com.example.duncanclark.domain.model.params.ParamsForNearbyPlaces
 import com.example.duncanclark.domain.model.ui.Places
 import com.example.duncanclark.domain.repository.Repository
 import com.example.duncanclark.domain.usecase.GetNearbyPlacesLunchUseCaseImpl
@@ -26,7 +25,7 @@ object DomainModule {
     @Singleton
     @Provides
     fun provideGetNearbyPlacesUseCase(
-        @Named("NearbyPlacesRepositoryImpl") repository: Repository<ParamsNearbyPlace, Flow<Result<Places>>>,
+        @Named("NearbyPlacesRepositoryImpl") repository: Repository<ParamsForNearbyPlaces, Flow<Result<Places>>>,
         mapper: ParamsNearbyPlaceMapperImpl,
     ): GetNearbyPlacesLunchUseCaseImpl {
         return GetNearbyPlacesLunchUseCaseImpl(repository, mapper)

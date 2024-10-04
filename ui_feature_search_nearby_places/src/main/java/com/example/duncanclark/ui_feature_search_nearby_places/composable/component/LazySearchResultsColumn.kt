@@ -14,13 +14,17 @@ fun LazySearchResultsColumn(
     places: List<Place>,
 ) {
     LazyColumn(
-        modifier = modifier.padding(horizontal = 6.dp, vertical = 12.dp)
+        modifier = modifier
     ) {
-         items(places) { place ->
-            RestaurantSearchResultsRow(
-                modifier = Modifier,
-                place = place
-            )
+        items(places) { place ->
+            when (place) {
+                is Place.LunchPlace -> {
+                    RestaurantSearchResultsRow(
+                        modifier = Modifier.padding(horizontal = 18.dp, vertical = 12.dp),
+                        place = place
+                    )
+                }
+            }
         }
     }
 }
