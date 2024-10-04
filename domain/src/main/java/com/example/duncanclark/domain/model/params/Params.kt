@@ -15,7 +15,7 @@ data class BodyParamsForNearbyPlaces(
 )
 
 // SearchText
-data class ParamsForSearchText(
+data class ParamsForSearchTextPlaces(
     val fieldMasks: String,
     val bodyParams: BodyParamsForSearchText,
 )

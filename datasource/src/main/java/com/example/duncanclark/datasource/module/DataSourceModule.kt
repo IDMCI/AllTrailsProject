@@ -1,16 +1,16 @@
 package com.example.duncanclark.datasource.module
 
 import com.example.duncanclark.datasource.api.NearbyPlacesApiService
-import com.example.duncanclark.datasource.api.SearchTextApiService
+import com.example.duncanclark.datasource.api.SearchTextPlacesApiService
 import com.example.duncanclark.datasource.mapper.LunchPlacesMapperImpl
 import com.example.duncanclark.datasource.remote.NearbyPlacesApiDataSource
 import com.example.duncanclark.datasource.remote.NearbyPlacesApiDataSourceImpl
 import com.example.duncanclark.datasource.remote.SearchTextApiDataSource
 import com.example.duncanclark.datasource.remote.SearchTextApiDataSourceImpl
 import com.example.duncanclark.datasource.repository.NearbyPlacesRepositoryImpl
-import com.example.duncanclark.datasource.repository.SearchNearbyPlacesRepositoryImpl
+import com.example.duncanclark.datasource.repository.SearchTextPlacesRepositoryImpl
 import com.example.duncanclark.domain.model.params.ParamsForNearbyPlaces
-import com.example.duncanclark.domain.model.params.ParamsForSearchText
+import com.example.duncanclark.domain.model.params.ParamsForSearchTextPlaces
 import com.example.duncanclark.domain.model.ui.Places
 import com.example.duncanclark.domain.repository.Repository
 import dagger.Module
@@ -33,22 +33,34 @@ object DataSourceModule {
 
     @Singleton
     @Provides
+    fun provideNearbyPlacesApiDataSourceImpl(
+        nearbyPlacesApiService: NearbyPlacesApiService,
+    ): NearbyPlacesApiDataSource = NearbyPlacesApiDataSourceImpl(nearbyPlacesApiService)
+
+    @Singleton
+    @Provides
+    fun provideSearchTextApiDataSourceImpl(
+        searchTextPlacesApiService: SearchTextPlacesApiService,
+    ) = SearchTextApiDataSourceImpl(searchTextPlacesApiService)
+
+    @Singleton
+    @Provides
     @Named("NearbyPlacesRepositoryImpl")
     fun provideNearbyPlacesRepositoryImpl(
-        dataSource: NearbyPlacesApiDataSource,
+        nearbyDataSource: NearbyPlacesApiDataSourceImpl,
         @Named("LunchPlacesMapperImpl") mapper: LunchPlacesMapperImpl
     ): Repository<ParamsForNearbyPlaces, Flow<Result<Places>>> {
-        return NearbyPlacesRepositoryImpl(dataSource, mapper)
+        return NearbyPlacesRepositoryImpl(nearbyDataSource, mapper)
     }
 
     @Singleton
     @Provides
-    @Named("SearchNearbyPlacesRepositoryImpl")
-    fun provideSearchNearbyPlacesRepositoryImpl(
-        dataSource: SearchTextApiDataSource,
+    @Named("SearchTextPlacesRepositoryImpl")
+    fun provideSearchTextPlacesRepositoryImpl(
+        searchTextApiDataSourceImpl: SearchTextApiDataSourceImpl,
         @Named("LunchPlacesMapperImpl") mapper: LunchPlacesMapperImpl
-    ): Repository<ParamsForSearchText, Flow<Result<Places>>> {
-        return SearchNearbyPlacesRepositoryImpl(dataSource, mapper)
+    ): Repository<ParamsForSearchTextPlaces, Flow<Result<Places>>> {
+        return SearchTextPlacesRepositoryImpl(searchTextApiDataSourceImpl, mapper)
     }
 
     @Singleton
@@ -82,20 +94,14 @@ object DataSourceModule {
         retrofit: Retrofit
     ): NearbyPlacesApiService = retrofit.create(NearbyPlacesApiService::class.java)
 
+    @Singleton
+    @Provides
+    fun provideSearchTextPlacesApiService(
+        retrofit: Retrofit
+    ): SearchTextPlacesApiService = retrofit.create(SearchTextPlacesApiService::class.java)
+
     @Reusable
     @Provides
     @Named("LunchPlacesMapperImpl")
     fun provideApiPlacesToPlacesMapperImpl() = LunchPlacesMapperImpl()
-
-    @Singleton
-    @Provides
-    fun provideNearbyPlacesApiDataSourceImpl(
-        apiService: NearbyPlacesApiService,
-    ): NearbyPlacesApiDataSource = NearbyPlacesApiDataSourceImpl(apiService)
-
-    @Singleton
-    @Provides
-    fun provideSearchTextApiDataSourceImpl(
-        apiService: SearchTextApiService,
-    ): SearchTextApiDataSource = SearchTextApiDataSourceImpl(apiService)
 }

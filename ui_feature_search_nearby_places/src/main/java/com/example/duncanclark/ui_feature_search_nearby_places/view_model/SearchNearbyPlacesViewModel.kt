@@ -8,6 +8,8 @@ import com.example.duncanclark.domain.model.ui.LunchPlaces
 import com.example.duncanclark.domain.model.ui.Places
 import com.example.duncanclark.domain.usecase.GetNearbyPlacesLunchUseCase
 import com.example.duncanclark.domain.usecase.GetNearbyPlacesLunchUseCaseImpl
+import com.example.duncanclark.domain.usecase.SearchTextLunchUseCase
+import com.example.duncanclark.domain.usecase.SearchTextLunchUseCaseImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -18,7 +20,10 @@ import javax.inject.Named
 @HiltViewModel
 class SearchNearbyPlacesViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
-    @Named("GetNearbyPlacesLunchUseCaseImpl") private val useCase: GetNearbyPlacesLunchUseCaseImpl,
+    @Named("GetNearbyPlacesLunchUseCaseImpl")
+    private val getNearbyPlacesUseCase: GetNearbyPlacesLunchUseCaseImpl,
+    @Named("SearchTextLunchUseCaseImpl")
+    private val searchTextUseCase: SearchTextLunchUseCaseImpl,
 ): ViewModel() {
     private val _uiState = MutableStateFlow<UiState<Places>>(UiState.Idle)
     val uiState: StateFlow<UiState<Places>> = _uiState
@@ -43,7 +48,24 @@ class SearchNearbyPlacesViewModel @Inject constructor(
     ) {
         viewModelScope.launch {
             loading()
-            useCase.execute(lat, lng).collect { result ->
+            getNearbyPlacesUseCase.execute(lat, lng).collect { result ->
+                _uiState.value = when {
+                    result.isSuccess -> {
+                        UiState.Success(result.getOrDefault(emptyList()))
+                    }
+                    result.isFailure -> {
+                        UiState.Error("Oh no! Something went wrong!")
+                    }
+                    else -> UiState.Error("Oh no! Something went REALLY wrong!")
+                }
+            }
+        }
+    }
+
+    fun searchByText(textQuery: String) {
+        viewModelScope.launch {
+            loading()
+            searchTextUseCase.execute(textQuery).collect { result ->
                 _uiState.value = when {
                     result.isSuccess -> {
                         UiState.Success(result.getOrDefault(emptyList()))
