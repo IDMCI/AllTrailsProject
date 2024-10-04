@@ -55,7 +55,6 @@ android {
 }
 
 dependencies {
-    implementation(project(":common"))
     implementation(project(":domain"))
     implementation(project(":datasource"))
     implementation(project(":ui_feature_search_nearby_places"))

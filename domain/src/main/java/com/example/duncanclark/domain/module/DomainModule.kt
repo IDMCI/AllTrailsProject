@@ -4,7 +4,7 @@ import com.example.duncanclark.domain.mapper.ParamsNearbyPlaceMapperImpl
 import com.example.duncanclark.domain.model.params.ParamsNearbyPlace
 import com.example.duncanclark.domain.model.ui.LunchPlaces
 import com.example.duncanclark.domain.repository.Repository
-import com.example.duncanclark.domain.usecase.SearchNearbyPlacesLunchUseCaseImpl
+import com.example.duncanclark.domain.usecase.SearchNearbyPlacesLunchUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
@@ -22,15 +22,14 @@ object DomainModule {
     @Provides
     fun provideParamsNearbyPlaceMapperImpl() = ParamsNearbyPlaceMapperImpl()
 
-//    @Singleton
-//    @Provides
-//    fun provideGetNearbyPlacesUseCase(
-////        @Named("NearbyPlacesRepositoryImpl")
-////        repository: Repository<ParamsNearbyPlace, Flow<Result<LunchPlaces>>>,
-////        @Named("ParamsNearbyPlaceMapperImpl")
-////        mapper: ParamsNearbyPlaceMapperImpl,
-//    ): SearchNearbyPlacesLunchUseCaseImpl {
-////        return SearchNearbyPlacesLunchUseCaseImpl(repository)
-//        return SearchNearbyPlacesLunchUseCaseImpl()
-//    }
+    @Singleton
+    @Provides
+    fun provideSearchNearbyPlacesLunchUseCase(
+        @Named("NearbyPlacesRepositoryImpl")
+        repository: Repository<ParamsNearbyPlace, Flow<Result<LunchPlaces>>>,
+//        @Named("ParamsNearbyPlaceMapperImpl")
+//        mapper: ParamsNearbyPlaceMapperImpl,
+    ) =
+//        return SearchNearbyPlacesLunchUseCaseImpl(repository)
+    SearchNearbyPlacesLunchUseCase(repository)
 }

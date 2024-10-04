@@ -1,6 +1,5 @@
 package com.example.duncanclark.domain.usecase
 
-import com.example.duncanclark.domain.common.mapper.Mapper
 import com.example.duncanclark.domain.model.params.Center
 import com.example.duncanclark.domain.model.params.Circle
 import com.example.duncanclark.domain.model.params.FieldMask
@@ -15,18 +14,16 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import javax.inject.Named
 
-interface SearchNearbyPlacesLunchUseCase {
+//interface SearchNearbyPlacesLunchUseCase {
 //    suspend fun execute(lat: Double, lng: Double): Flow<Result<LunchPlaces>>
-suspend fun execute(lat: Double, lng: Double): String
+//}
 
-}
-
-class SearchNearbyPlacesLunchUseCaseImpl @Inject constructor(
-//    @Named("NearbyPlacesRepositoryImpl")
-//    private val repository: Repository<ParamsNearbyPlace, Flow<Result<LunchPlaces>>>,
+class SearchNearbyPlacesLunchUseCase @Inject constructor(
+    @Named("NearbyPlacesRepositoryImpl")
+    private val repository: Repository<ParamsNearbyPlace, Flow<Result<LunchPlaces>>>,
 //    @Named("ParamsNearbyPlaceMapperImpl")
 //    private val mapper: Mapper<Pair<Double, Double>, ParamsNearbyPlace>
-): SearchNearbyPlacesLunchUseCase {
+): UseCaseWithParam<ParamsNearbyPlace, LunchPlaces> {
     private val fieldMasks = FieldMask.nearbyPlacesLunch()
     private val lat = 40.479822043320816
     private val lng = -104.89954079298904
@@ -38,14 +35,10 @@ class SearchNearbyPlacesLunchUseCaseImpl @Inject constructor(
         maxResultCount = 1
     )
 
-//    override suspend fun execute(lat: Double, lng: Double): Flow<Result<LunchPlaces>> {
-override suspend fun execute(lat: Double, lng: Double): String {
-
-//    return repository.getData(ParamsNearbyPlace(
-//            fieldMasks = fieldMasks,
-//            bodyParams = request
-//        ))
-//    }
-    return ""
-}
+    override suspend fun execute(input: ParamsNearbyPlace): Flow<Result<LunchPlaces>> {
+        return repository.getData(ParamsNearbyPlace(
+            fieldMasks = fieldMasks,
+            bodyParams = request
+        ))
+    }
 }
