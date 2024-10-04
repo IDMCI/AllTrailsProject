@@ -9,7 +9,7 @@ sealed class Place: BasePlace {
         override val placeId: PlaceId,
         override val displayName: String,
         val rating: Double?,
-        val servesLunch: Boolean,
+        val servesLunch: Boolean?,
         override val languageCode: String?,
         override val isSelected: Boolean = false,
     ) : Place()

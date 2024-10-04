@@ -22,7 +22,7 @@ data class ParamsForSearchTextPlaces(
 
 data class BodyParamsForSearchText(
     @SerialName("textQuery") val textQuery: String,
-    @SerialName("locationBias") val locationRestriction: LocationRestriction,
+    @SerialName("locationBias") val locationBias: LocationRestriction,
 )
 
 // Common
