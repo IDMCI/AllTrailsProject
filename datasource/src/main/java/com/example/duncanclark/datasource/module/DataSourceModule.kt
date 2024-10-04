@@ -36,7 +36,7 @@ object DataSourceModule {
     @Named("NearbyPlacesRepositoryImpl")
     fun provideNearbyPlacesRepositoryImpl(
         dataSource: NearbyPlacesApiDataSource,
-        mapper: LunchPlacesMapperImpl
+        @Named("LunchPlacesMapperImpl") mapper: LunchPlacesMapperImpl
     ): Repository<ParamsForNearbyPlaces, Flow<Result<Places>>> {
         return NearbyPlacesRepositoryImpl(dataSource, mapper)
     }
@@ -46,7 +46,7 @@ object DataSourceModule {
     @Named("SearchNearbyPlacesRepositoryImpl")
     fun provideSearchNearbyPlacesRepositoryImpl(
         dataSource: SearchTextApiDataSource,
-        mapper: LunchPlacesMapperImpl
+        @Named("LunchPlacesMapperImpl") mapper: LunchPlacesMapperImpl
     ): Repository<ParamsForSearchText, Flow<Result<Places>>> {
         return SearchNearbyPlacesRepositoryImpl(dataSource, mapper)
     }
@@ -84,6 +84,7 @@ object DataSourceModule {
 
     @Reusable
     @Provides
+    @Named("LunchPlacesMapperImpl")
     fun provideApiPlacesToPlacesMapperImpl() = LunchPlacesMapperImpl()
 
     @Singleton

@@ -9,6 +9,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.Reusable
 import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Named
@@ -20,13 +21,15 @@ object DomainModule {
 
     @Reusable
     @Provides
+    @Named("ParamsNearbyPlaceMapperImpl")
     fun provideParamsNearbyPlaceMapperImpl() = ParamsNearbyPlaceMapperImpl()
 
     @Singleton
     @Provides
-    fun provideGetNearbyPlacesUseCase(
+    @Named("GetNearbyPlacesLunchUseCaseImpl")
+    fun provideGetNearbyPlacesUseCaseImpl(
         @Named("NearbyPlacesRepositoryImpl") repository: Repository<ParamsForNearbyPlaces, Flow<Result<Places>>>,
-        mapper: ParamsNearbyPlaceMapperImpl,
+        @Named("ParamsNearbyPlaceMapperImpl") mapper: ParamsNearbyPlaceMapperImpl,
     ): GetNearbyPlacesLunchUseCaseImpl {
         return GetNearbyPlacesLunchUseCaseImpl(repository, mapper)
     }
