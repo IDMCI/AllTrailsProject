@@ -1,6 +1,5 @@
 package com.example.duncanclark.ui_feature_search_nearby_places.composable.component
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,22 +14,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.duncanclark.domain.model.ui.Place
-import com.example.duncanclark.domain.model.ui.PlaceId
 
 @Composable
 fun RestaurantSearchResultsRow(
     modifier: Modifier,
     place: Place,
-    clickable: Boolean,
-    onClick: (PlaceId) -> Unit
 ) {
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .padding(6.dp)
-            .clickable(clickable) {
-                onClick(place.placeId)
-            }
+            .padding(12.dp)
     ) {
         Column {
             // Display name
@@ -53,20 +46,13 @@ fun RestaurantSearchResultsRow(
 //                    tint = MaterialTheme.colorScheme.primary
 //                )
                 Text(
-                    text = "{ratings}",
+                    text = "{ratings} • ",
                     style = MaterialTheme.typography.bodyMedium,
                     fontWeight = FontWeight.SemiBold,
                     fontSize = 13.sp,
                     color = MaterialTheme.colorScheme.onPrimaryContainer
                 )
-                Text(
-                    modifier = Modifier.padding(horizontal = 2.dp),
-                    text = "\u2022",
-                    style = MaterialTheme.typography.bodyMedium,
-                    fontWeight = FontWeight.SemiBold,
-                    fontSize = 13.sp,
-                    color = MaterialTheme.colorScheme.onPrimaryContainer
-                )
+
                 Text(
                     modifier = Modifier.padding(horizontal = 2.dp),
                     text = "(reviews)",

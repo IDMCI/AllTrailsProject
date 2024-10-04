@@ -20,7 +20,6 @@ class ParamsNearbyPlaceMapperImpl @Inject constructor()
             bodyParams = NearbyPlaceRequestParams(
                 locationRestriction = createLocationRestriction(input),
                 includedTypes = IncludedType.nearbyPlacesLunch(),
-                maxResultCount = 10,
             )
         )
     }

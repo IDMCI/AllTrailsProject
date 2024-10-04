@@ -10,7 +10,7 @@ data class ParamsNearbyPlace(
 data class NearbyPlaceRequestParams(
     @SerialName("locationRestriction") val locationRestriction: LocationRestriction,
     @SerialName("includedTypes") val includedTypes: String,
-    @SerialName("maxResultCount") val maxResultCount: Int = 10,
+    @SerialName("maxResultCount") val maxResultCount: Int = 20, // Max number is between 1 and 20
 )
 
 data class LocationRestriction(

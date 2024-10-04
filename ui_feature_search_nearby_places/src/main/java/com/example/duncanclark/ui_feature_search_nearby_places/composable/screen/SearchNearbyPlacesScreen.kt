@@ -24,6 +24,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.duncanclark.common.ui.state.UiState
+import com.example.duncanclark.ui_feature_search_nearby_places.composable.component.LazySearchResultsColumn
 import com.example.duncanclark.ui_feature_search_nearby_places.composable.component.RestaurantSearchResultsRow
 import com.example.duncanclark.ui_feature_search_nearby_places.view_model.SearchNearbyPlacesViewModel
 
@@ -58,11 +59,10 @@ fun SearchNearbyPlacesScreen(
         is UiState.Success -> {
             showStatusMessage = false
             (uiState as? UiState.Success)?.let { state ->
-                RestaurantSearchResultsRow(
-                    Modifier.fillMaxWidth(),
-                    state.data.first(),
-                    false,
-                ) { }
+                LazySearchResultsColumn(
+                    modifier = Modifier.fillMaxSize(),
+                    places = state.data
+                )
             }
         }
     }
