@@ -17,7 +17,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.duncanclark.alltrailsproject.ui.theme.AllTrailsProjectTheme
-import com.example.duncanclark.ui_feature_search_nearby_places.composable.screen.SearchNearbyPlacesScreen
+import com.example.duncanclark.ui_feature_search_nearby_places.composable.screen.MapWithNearbyPlacesScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -52,11 +52,17 @@ fun MainActivityNavHost(
     val navController = rememberNavController()
     NavHost(
         navController = navController,
-        startDestination = "nearby-places-search",
+        startDestination = "map-nearby-places",
         modifier = modifier.fillMaxSize()
     ) {
-        composable("nearby-places-search") {
-            SearchNearbyPlacesScreen(
+//        composable("search-nearby-places") {
+//            MainScreen(
+//                modifier = Modifier.fillMaxWidth(),
+//                navController = navController,
+//            )
+//        }
+        composable("map-nearby-places") {
+            MapWithNearbyPlacesScreen(
                 modifier = Modifier.fillMaxWidth(),
                 navController = navController,
             )

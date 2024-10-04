@@ -1,4 +1,4 @@
-package com.example.duncanclark.ui_feature_search_nearby_places.composable.component
+package com.example.duncanclark.alltrailsproject.ui.composable.component
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn

@@ -10,6 +10,7 @@ coroutines-test = "1.9.0"
 devtoolsKsp = "2.0.20-1.0.25"
 hilt = "2.52"
 google-maps = "19.0.0"
+google-maps-compose = "6.1.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 kotlin = "2.0.20"
@@ -44,7 +45,8 @@ coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-
 dagger-hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 dagger-hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt"}
 dagger-hilt-gradle = { group = "com.google.dagger",  name = "hilt-android-gradle-plugin", version.ref = "hilt" }
-google-maps = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "google-maps" }
+#google-maps = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "google-maps" }
+google-maps-compse = { group = "com.google.maps.android", name = "maps-compose", version.ref = "google-maps-compose" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "logging-intereceptor" }
 kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin"}

@@ -1,4 +1,4 @@
-package com.example.duncanclark.ui_feature_search_nearby_places.composable.component
+package com.example.duncanclark.alltrailsproject.ui.composable.component
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Text
@@ -12,12 +12,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.duncanclark.ui_feature_search_nearby_places.R
-import com.example.duncanclark.ui_feature_search_nearby_places.view_model.SearchNearbyPlacesViewModel
 
 @Composable
 fun SearchBar(
     modifier: Modifier,
-    viewModel: SearchNearbyPlacesViewModel = hiltViewModel()
+    viewModel: com.example.duncanclark.alltrailsproject.ui.view_model.SearchNearbyPlacesViewModel = hiltViewModel()
 ) {
     var query by remember { mutableStateOf("") }
 
