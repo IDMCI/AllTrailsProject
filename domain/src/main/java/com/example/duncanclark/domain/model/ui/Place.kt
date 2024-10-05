@@ -1,10 +1,15 @@
 package com.example.duncanclark.domain.model.ui
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
 typealias Places = List<Place>
 typealias LunchPlaces = List<Place.LunchPlace>
 typealias PlaceId = String
 
-sealed class Place: BasePlace {
+@Parcelize
+sealed class Place: BasePlace, Parcelable {
+    @Parcelize
     data class LunchPlace(
         override val placeId: PlaceId,
         override val displayName: String,

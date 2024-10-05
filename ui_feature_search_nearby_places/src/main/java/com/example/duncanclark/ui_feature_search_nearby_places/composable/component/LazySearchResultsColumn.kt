@@ -1,4 +1,4 @@
-package com.example.duncanclark.alltrailsproject.ui.composable.component
+package com.example.duncanclark.ui_feature_search_nearby_places.composable.component
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -12,6 +12,7 @@ import com.example.duncanclark.domain.model.ui.Place
 fun LazySearchResultsColumn(
     modifier: Modifier,
     places: List<Place>,
+
 ) {
     LazyColumn(
         modifier = modifier

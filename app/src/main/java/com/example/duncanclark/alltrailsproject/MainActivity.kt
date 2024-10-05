@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -16,6 +17,9 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.duncanclark.alltrailsproject.ui.composable.component.SearchBar
+import com.example.duncanclark.alltrailsproject.ui.composable.screen.MainScreen
+import com.example.duncanclark.alltrailsproject.ui.composable.screen.nav_host.MainActivityNavHost
 import com.example.duncanclark.alltrailsproject.ui.theme.AllTrailsProjectTheme
 import com.example.duncanclark.ui_feature_search_nearby_places.composable.screen.MapWithNearbyPlacesScreen
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,36 +40,9 @@ class MainActivity : ComponentActivity() {
                         )
                     }
                 ) { innerPadding ->
-                    MainActivityNavHost(
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                    MainScreen(modifier = Modifier.padding(innerPadding))
                 }
             }
-        }
-    }
-}
-
-@Composable
-fun MainActivityNavHost(
-    modifier: Modifier
-) {
-    val navController = rememberNavController()
-    NavHost(
-        navController = navController,
-        startDestination = "map-nearby-places",
-        modifier = modifier.fillMaxSize()
-    ) {
-//        composable("search-nearby-places") {
-//            MainScreen(
-//                modifier = Modifier.fillMaxWidth(),
-//                navController = navController,
-//            )
-//        }
-        composable("map-nearby-places") {
-            MapWithNearbyPlacesScreen(
-                modifier = Modifier.fillMaxWidth(),
-                navController = navController,
-            )
         }
     }
 }
