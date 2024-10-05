@@ -42,21 +42,13 @@ fun RestaurantSearchResultsRow(
             Row(
                 modifier = Modifier.semantics(mergeDescendants = true) {}
             ) {
-                // TODO DC: Add icon
-//                Icon(
-//                    modifier = Modifier.scale(1f),
-//                    bitmap = ImageBitmap.imageResource(),
-//                    contentDescription = "",
-//                    tint = MaterialTheme.colorScheme.primary
-//                )
                 Text(
-                    text = "{ratings} • ",
+                    text = "${place.rating} • ",
                     style = MaterialTheme.typography.bodyMedium,
                     fontWeight = FontWeight.SemiBold,
                     fontSize = 13.sp,
                     color = MaterialTheme.colorScheme.onPrimaryContainer
                 )
-
                 Text(
                     modifier = Modifier.padding(horizontal = 2.dp),
                     text = "(reviews)",

@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.dagger.hilt)
     alias(libs.plugins.devtools.ksp)
+    id("kotlin-parcelize")
 }
 
 android {
@@ -56,7 +57,8 @@ dependencies {
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.google.maps)
+//    implementation(libs.google.maps)
+    implementation(libs.google.maps.compse)
 
     implementation(libs.androidx.hilt.navigation)
 

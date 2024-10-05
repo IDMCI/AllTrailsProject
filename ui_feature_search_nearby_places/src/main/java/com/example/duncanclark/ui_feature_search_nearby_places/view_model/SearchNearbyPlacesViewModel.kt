@@ -4,11 +4,8 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.duncanclark.common.ui.state.UiState
-import com.example.duncanclark.domain.model.ui.LunchPlaces
 import com.example.duncanclark.domain.model.ui.Places
-import com.example.duncanclark.domain.usecase.GetNearbyPlacesLunchUseCase
 import com.example.duncanclark.domain.usecase.GetNearbyPlacesLunchUseCaseImpl
-import com.example.duncanclark.domain.usecase.SearchTextLunchUseCase
 import com.example.duncanclark.domain.usecase.SearchTextLunchUseCaseImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -33,18 +30,20 @@ class SearchNearbyPlacesViewModel @Inject constructor(
     }
 
     init {
-        val savedState = savedStateHandle.get<UiState<LunchPlaces>>("search_nearby_places")
-        savedState?.let { _uiState.value = it }
+        val query: String? = savedStateHandle["query"]
+        val lat: Double? = savedStateHandle["lat"]
+        val lng: Double? = savedStateHandle["lng"]
 
         // TODO DC: Add permission logic to get current location
-        val lat = 40.479822043320816
-        val lng = -104.89954079298904
-        searchByLocation(lat, lng)
+        when {
+            query != null -> searchByText(query)
+            (lat != null) && (lng != null) -> searchByLocation(lat, lng)
+        }
     }
 
     fun searchByLocation(
         lat: Double,
-        lng: Double
+        lng: Double,
     ) {
         viewModelScope.launch {
             loading()

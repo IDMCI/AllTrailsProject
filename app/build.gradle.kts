@@ -99,7 +99,7 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.kotlin.stdlib)
-    implementation(libs.google.maps)
+//    implementation(libs.google.maps)
 
     implementation(libs.retrofit)
     implementation(libs.kotlinx.serialization.json)

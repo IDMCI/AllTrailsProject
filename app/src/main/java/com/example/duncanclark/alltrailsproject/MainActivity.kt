@@ -5,19 +5,14 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
+import com.example.duncanclark.alltrailsproject.ui.composable.screen.MainScreen
 import com.example.duncanclark.alltrailsproject.ui.theme.AllTrailsProjectTheme
-import com.example.duncanclark.ui_feature_search_nearby_places.composable.screen.SearchNearbyPlacesScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -36,30 +31,9 @@ class MainActivity : ComponentActivity() {
                         )
                     }
                 ) { innerPadding ->
-                    MainActivityNavHost(
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                    MainScreen(modifier = Modifier.padding(innerPadding))
                 }
             }
-        }
-    }
-}
-
-@Composable
-fun MainActivityNavHost(
-    modifier: Modifier
-) {
-    val navController = rememberNavController()
-    NavHost(
-        navController = navController,
-        startDestination = "nearby-places-search",
-        modifier = modifier.fillMaxSize()
-    ) {
-        composable("nearby-places-search") {
-            SearchNearbyPlacesScreen(
-                modifier = Modifier.fillMaxWidth(),
-                navController = navController,
-            )
         }
     }
 }
