@@ -1,13 +1,8 @@
 package com.example.duncanclark.alltrailsproject.ui.composable.screen.nav_host
 
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -17,12 +12,12 @@ import com.example.duncanclark.ui_feature_map_nearby_places.composable.MapWithNe
 import com.example.duncanclark.ui_feature_search_nearby_places.composable.screen.SearchNearbyPlacesScreen
 
 @Composable
-fun MainActivityNavHost(
+fun MainNavHost(
     modifier: Modifier,
     navController: NavHostController,
 ) {
     NavHost(
-        modifier = modifier,
+        modifier = modifier.fillMaxSize(),
         navController = navController,
         startDestination = "home",
     ) {

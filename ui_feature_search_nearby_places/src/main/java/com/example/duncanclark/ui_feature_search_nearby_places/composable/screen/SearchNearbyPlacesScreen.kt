@@ -1,16 +1,27 @@
 package com.example.duncanclark.ui_feature_search_nearby_places.composable.screen
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.example.duncanclark.common.ui.state.UiState
 import com.example.duncanclark.domain.model.ui.Place
 import com.example.duncanclark.ui_feature_search_nearby_places.composable.component.SearchNearbyPlacesResults
@@ -48,16 +59,19 @@ fun SearchNearbyPlacesScreen(
                 statusMessage = it.message
             }
         }
+
         UiState.Idle -> {
             queryResult = emptyList()
             statusMessage = ""
         }
+
         UiState.Loading -> {
             (uiState as? UiState.Loading)?.let {
                 queryResult = emptyList()
                 statusMessage = "Loading..."
             }
         }
+
         is UiState.Success -> {
             (uiState as? UiState.Success)?.let { state ->
                 queryResult = state.data
@@ -67,12 +81,28 @@ fun SearchNearbyPlacesScreen(
                 }
                 SearchNearbyPlacesResults(
                     modifier = modifier,
-                    statusMessage = statusMessage,
                     queryResult = state.data,
                 ) { placeId ->
                     navHostController.navigate("details/$placeId")
                 }
             }
+        }
+    }
+    if(statusMessage.isNotEmpty()) {
+        Column(
+            modifier = modifier
+                .fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Text(
+                modifier = Modifier.padding(12.dp),
+                text = statusMessage,
+                fontSize = 16.sp,
+                fontWeight = FontWeight.SemiBold,
+                fontStyle = FontStyle.Italic,
+                color = MaterialTheme.colorScheme.onSecondary,
+            )
         }
     }
 }
