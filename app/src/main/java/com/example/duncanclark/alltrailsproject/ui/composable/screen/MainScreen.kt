@@ -42,7 +42,7 @@ fun MainScreen(
                     currentScreen = "search",
                     query = currentQuery
                 ) {
-                    navController.navigate("maps/$currentQuery")
+                    navController.navigate("map-nearby-places")
                 }
             }
         }
