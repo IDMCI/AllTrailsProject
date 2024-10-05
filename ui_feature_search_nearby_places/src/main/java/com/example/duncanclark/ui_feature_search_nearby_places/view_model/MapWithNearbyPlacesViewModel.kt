@@ -16,11 +16,6 @@ class MapWithNearbyPlacesViewModel @Inject constructor(
     val mapMarkers = mutableListOf<MapMarker>()
     var selectedMapMarker: MapMarker? = null
 
-    init {
-//        val savedPlaces: Places? = savedStateHandle["places"]
-//        savedPlaces?.let { setPlaces(it) }
-    }
-
     fun setPlaces(places: Places) {
         _places.addAll(places)
     }

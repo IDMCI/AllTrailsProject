@@ -1,8 +1,13 @@
 package com.example.duncanclark.alltrailsproject.ui.composable.screen.nav_host
 
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -49,6 +54,17 @@ fun MainActivityNavHost(
                 lat = lat?.toDouble() ?: 0.0,
                 lng = lng?.toDouble() ?: 0.0,
             )
+        }
+        composable(
+            "details/{placeId}",
+            listOf(navArgument("placeId") { type = NavType.StringType })
+        ) { navBackStackEntry ->
+            val placeId = navBackStackEntry.arguments?.getString("placeId") ?: ""
+            Row(
+                modifier = Modifier.fillMaxHeight()
+            ) {
+                Text("You clicked: $placeId")
+            }
         }
     }
 }

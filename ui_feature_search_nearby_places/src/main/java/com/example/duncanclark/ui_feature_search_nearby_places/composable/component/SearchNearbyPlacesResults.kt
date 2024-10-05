@@ -14,8 +14,6 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.example.duncanclark.domain.model.ui.Place
 import com.example.duncanclark.domain.model.ui.PlaceId
 
@@ -32,8 +30,9 @@ fun SearchNearbyPlacesResults(
             LazySearchResultsColumn(
                 modifier = modifier,
                 places = queryResult,
-
-            )
+            ) { placeId ->
+                onClick(placeId)
+            }
         }
         // Display status message
         false -> {

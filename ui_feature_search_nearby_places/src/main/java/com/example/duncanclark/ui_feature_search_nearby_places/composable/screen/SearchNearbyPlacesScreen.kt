@@ -15,7 +15,6 @@ import com.example.duncanclark.common.ui.state.UiState
 import com.example.duncanclark.domain.model.ui.Place
 import com.example.duncanclark.ui_feature_search_nearby_places.composable.component.SearchNearbyPlacesResults
 import com.example.duncanclark.ui_feature_search_nearby_places.view_model.SearchNearbyPlacesViewModel
-import com.google.android.gms.maps.model.LatLng
 
 @Composable
 fun SearchNearbyPlacesScreen(
@@ -26,8 +25,6 @@ fun SearchNearbyPlacesScreen(
     navHostController: NavHostController = rememberNavController(),
     viewModel: SearchNearbyPlacesViewModel = hiltViewModel(),
 ) {
-
-    // States & Statuses
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     var statusMessage by remember { mutableStateOf("") }
     var queryResult by remember { mutableStateOf(emptyList<Place>()) }
@@ -73,7 +70,7 @@ fun SearchNearbyPlacesScreen(
                     statusMessage = statusMessage,
                     queryResult = state.data,
                 ) { placeId ->
-                    navHostController.navigate("map-nearby-places")
+                    navHostController.navigate("details/$placeId")
                 }
             }
         }

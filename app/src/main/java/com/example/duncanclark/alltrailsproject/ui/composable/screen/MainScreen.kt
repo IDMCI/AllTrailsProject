@@ -25,7 +25,11 @@ fun MainScreen(
             modifier = Modifier
                 .fillMaxWidth()
         ) { query ->
-            navController.navigate("search/$query")
+            navController.navigate("search/$query") {
+                popUpTo(navController.graph.startDestinationId) {
+                    inclusive = true
+                }
+            }
         }
     }
 }

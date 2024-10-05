@@ -4,11 +4,9 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.duncanclark.common.ui.state.UiState
-import com.example.duncanclark.domain.model.ui.LunchPlaces
 import com.example.duncanclark.domain.model.ui.Places
 import com.example.duncanclark.domain.usecase.GetNearbyPlacesLunchUseCaseImpl
 import com.example.duncanclark.domain.usecase.SearchTextLunchUseCaseImpl
-import com.google.android.gms.maps.model.LatLng
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
