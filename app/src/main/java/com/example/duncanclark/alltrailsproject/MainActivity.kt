@@ -11,6 +11,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.ui.Modifier
+import com.example.duncanclark.alltrailsproject.ui.composable.component.MapsToSearchFloatingActionButton
 import com.example.duncanclark.alltrailsproject.ui.composable.screen.MainScreen
 import com.example.duncanclark.alltrailsproject.ui.theme.AllTrailsProjectTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,16 +24,20 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             AllTrailsProjectTheme {
-                Scaffold(
-                    modifier = Modifier.fillMaxSize(),
-                    topBar = {
-                        TopAppBar(
-                            title = { Text("AllTrails at Lunch") }
-                        )
-                    }
-                ) { innerPadding ->
-                    MainScreen(modifier = Modifier.padding(innerPadding))
-                }
+                MainScreen()
+//                Scaffold(
+//                    modifier = Modifier.fillMaxSize(),
+//                    topBar = {
+//                        TopAppBar(
+//                            title = { Text("AllTrails at Lunch") }
+//                        )
+//                    },
+//                    floatingActionButton = {
+//                        MapsToSearchFloatingActionButton() { }
+//                    }
+//                ) { innerPadding ->
+//                    MainScreen(modifier = Modifier.padding(innerPadding))
+//                }
             }
         }
     }

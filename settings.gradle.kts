@@ -21,7 +21,9 @@ dependencyResolutionManagement {
 
 rootProject.name = "AllTrailsProject"
 include(":app")
+include(":common")
 include(":domain")
 include(":datasource")
+include(":ui_feature_map_nearby_places")
 include(":ui_feature_search_nearby_places")
-include(":common")
+

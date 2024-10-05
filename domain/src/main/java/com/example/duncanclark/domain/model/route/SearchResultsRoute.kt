@@ -1,4 +1,4 @@
-package com.example.duncanclark.ui_feature_search_nearby_places.model.route
+package com.example.duncanclark.domain.model.route
 
 import android.os.Parcelable
 import com.example.duncanclark.domain.model.ui.PlaceId

@@ -13,6 +13,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.example.duncanclark.ui_feature_map_nearby_places.composable.MapWithNearbyPlacesScreen
 import com.example.duncanclark.ui_feature_search_nearby_places.composable.screen.SearchNearbyPlacesScreen
 
 @Composable
@@ -28,6 +29,7 @@ fun MainActivityNavHost(
         composable("home") {
             SearchNearbyPlacesScreen(
                 modifier = Modifier.fillMaxSize(),
+                navHostController = navController
             )
         }
         composable(
@@ -37,7 +39,8 @@ fun MainActivityNavHost(
             val query = navBackStackEntry.arguments?.getString("query") ?: ""
             SearchNearbyPlacesScreen(
                 modifier = Modifier.fillMaxSize(),
-                query = query
+                query = query,
+                navHostController = navController
             )
         }
         composable(
@@ -53,18 +56,26 @@ fun MainActivityNavHost(
                 modifier = Modifier.fillMaxSize(),
                 lat = lat?.toDouble() ?: 0.0,
                 lng = lng?.toDouble() ?: 0.0,
+                navHostController = navController
             )
         }
         composable(
-            "details/{placeId}",
-            listOf(navArgument("placeId") { type = NavType.StringType })
+            "map-nearby-places",
         ) { navBackStackEntry ->
-            val placeId = navBackStackEntry.arguments?.getString("placeId") ?: ""
-            Row(
-                modifier = Modifier.fillMaxHeight()
-            ) {
-                Text("You clicked: $placeId")
-            }
+            MapWithNearbyPlacesScreen(
+                modifier = Modifier.fillMaxSize(),
+            )
         }
+//        composable(
+//            "details/{placeId}",
+//            listOf(navArgument("placeId") { type = NavType.StringType })
+//        ) { navBackStackEntry ->
+//            val placeId = navBackStackEntry.arguments?.getString("placeId") ?: ""
+//            Row(
+//                modifier = Modifier.fillMaxHeight()
+//            ) {
+//                Text("You clicked: $placeId")
+//            }
+//        }
     }
 }

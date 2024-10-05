@@ -22,7 +22,6 @@ mockitoKotlin = "5.4.0"
 mockk = "1.13.12"
 retrofit2 = "2.11.0"
 retrofit2KotlinxSerializationConverter = "1.0.0"
-secretsGradlePlugin = "1.1.0"
 secretsGradlePluginVersion = "2.0.1"
 
 [libraries]

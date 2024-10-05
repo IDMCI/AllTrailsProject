@@ -8,7 +8,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.duncanclark.ui_feature_search_nearby_places"
+    namespace = "com.example.duncanclark.ui_feature_map_nearby_places"
     compileSdk = 34
 
     defaultConfig {
@@ -57,6 +57,7 @@ dependencies {
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.tooling.preview)
+//    implementation(libs.google.maps)
     implementation(libs.google.maps.compse)
 
     implementation(libs.androidx.hilt.navigation)

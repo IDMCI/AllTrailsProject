@@ -22,7 +22,7 @@ fun SearchNearbyPlacesScreen(
     query: String? = null,
     lat: Double? = null,
     lng: Double? = null,
-    navHostController: NavHostController = rememberNavController(),
+    navHostController: NavHostController,
     viewModel: SearchNearbyPlacesViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
