@@ -34,7 +34,7 @@ fun MainScreen(
         modifier = Modifier.fillMaxSize(),
         topBar = {
             TopAppBar(
-                title = { Text("AllTrails at Lunch") }
+                title = { Text("AllTrails @ Lunch") }
             )
         },
         floatingActionButton = {

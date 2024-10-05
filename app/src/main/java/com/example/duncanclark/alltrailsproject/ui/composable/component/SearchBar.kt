@@ -7,7 +7,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -55,7 +57,13 @@ fun SearchBar(
                 if (query.isNotEmpty()) {
                     onSearch(query)
                 }
-            })
+            }),
+            colors = OutlinedTextFieldDefaults.colors(
+                unfocusedBorderColor = MaterialTheme.colorScheme.secondary,
+                focusedBorderColor = MaterialTheme.colorScheme.secondary,
+                focusedLabelColor = MaterialTheme.colorScheme.secondary,
+                cursorColor = MaterialTheme.colorScheme.tertiary,
+            )
         )
     }
 }
