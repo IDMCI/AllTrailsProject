@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="ui_map_loading">Loading...</string>
+    <string name="ui_map_loading">Loading…</string>
 </resources>
