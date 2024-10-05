@@ -1,6 +1,5 @@
 package com.example.duncanclark.ui_feature_search_nearby_places.composable.screen
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -82,9 +81,7 @@ fun SearchNearbyPlacesScreen(
                 SearchNearbyPlacesResults(
                     modifier = modifier,
                     queryResult = state.data,
-                ) { placeId ->
-                    navHostController.navigate("details/$placeId")
-                }
+                )
             }
         }
     }
