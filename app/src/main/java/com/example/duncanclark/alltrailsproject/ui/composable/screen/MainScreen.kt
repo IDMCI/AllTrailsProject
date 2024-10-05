@@ -1,5 +1,9 @@
 package com.example.duncanclark.alltrailsproject.ui.composable.screen
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -21,6 +25,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.duncanclark.alltrailsproject.ui.composable.component.MapsToSearchFloatingActionButton
 import com.example.duncanclark.alltrailsproject.ui.composable.component.SearchBar
 import com.example.duncanclark.alltrailsproject.ui.composable.screen.nav_host.MainNavHost
+import com.example.duncanclark.alltrailsproject.ui.model.FabState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -28,7 +33,8 @@ fun MainScreen(
     modifier: Modifier = Modifier
 ) {
     val navController = rememberNavController()
-    var currentQuery by remember { mutableStateOf("") }
+    var fabState by remember { mutableStateOf<FabState?>(null) }
+    var showFab by remember { mutableStateOf(false) }
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -38,13 +44,19 @@ fun MainScreen(
             )
         },
         floatingActionButton = {
-            if (currentQuery.isNotEmpty()) {
+            AnimatedVisibility(
+                visible = showFab,
+                enter = fadeIn(animationSpec = tween(durationMillis = 2000)),
+                exit = fadeOut(animationSpec = tween(durationMillis = 2000))
+            ) {
                 MapsToSearchFloatingActionButton(
                     modifier = Modifier,
-                    currentScreen = "search",
-                    query = currentQuery
+                    fabState = fabState
                 ) {
-                    navController.navigate("map-nearby-places")
+                    fabState?.let {
+                        showFab = true
+                        navController.navigate(it.route)
+                    }
                 }
             }
         }
@@ -54,12 +66,14 @@ fun MainScreen(
                 Modifier.padding(top = 96.dp)
                     .background(MaterialTheme.colorScheme.secondary),
                 navController
-            )
+            ) { updatedFabState ->
+                showFab = (updatedFabState != null)
+                fabState = updatedFabState
+            }
             SearchBar(
                 modifier = Modifier
                     .fillMaxWidth()
             ) { query ->
-                currentQuery = query
                 navController.navigate("search/$query")
             }
         }

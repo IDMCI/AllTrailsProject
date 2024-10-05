@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <application
         android:name=".AllTrailsProjectApplication"
         android:allowBackup="true"
@@ -26,6 +28,13 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="${MAPS_API_KEY}" />
+
+        <service
+            android:name=".permissions.service.LocationService"
+            android:foregroundServiceType="location"
+            android:enabled="true"
+            android:exported="false" />
+
     </application>
 
 </manifest>

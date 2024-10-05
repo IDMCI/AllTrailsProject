@@ -1,42 +1,70 @@
 package com.example.duncanclark.alltrailsproject.ui.composable.screen.nav_host
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.example.duncanclark.alltrailsproject.ui.model.FabState
+import com.example.duncanclark.alltrailsproject.ui.screen.PermissionsScreen
 import com.example.duncanclark.ui_feature_map_nearby_places.composable.MapWithNearbyPlacesScreen
 import com.example.duncanclark.ui_feature_search_nearby_places.composable.screen.SearchNearbyPlacesScreen
+import kotlin.math.ln
 
 @Composable
 fun MainNavHost(
     modifier: Modifier,
     navController: NavHostController,
+    fabState: (FabState?) -> Unit
 ) {
+    // TODO DC: Remove this logic here and cache data in Room instead.
+    var queryHistory by remember { mutableStateOf<String?>(null) }
+    var latHistory by remember { mutableStateOf<Double?>(null) }
+    var lngHistory by remember { mutableStateOf<Double?>(null) }
+
     NavHost(
         modifier = modifier.fillMaxSize(),
         navController = navController,
-        startDestination = "home",
+        startDestination = "permissions",
     ) {
-        composable("home") {
-            SearchNearbyPlacesScreen(
-                modifier = Modifier.fillMaxSize(),
-                navHostController = navController
-            )
+        composable("permissions") {
+            PermissionsScreen(navController = navController)
+            fabState(null)
+        }
+        composable("denied") {
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                Text("Permission Denied. Unable to access location.")
+            }
         }
         composable(
             "search/{query}",
             listOf(navArgument("query") { type = NavType.StringType })
         ) { navBackStackEntry ->
-            val query = navBackStackEntry.arguments?.getString("query") ?: ""
+            queryHistory = navBackStackEntry.arguments?.getString("query") ?: ""
             SearchNearbyPlacesScreen(
                 modifier = Modifier.fillMaxSize(),
-                query = query,
+                query = queryHistory,
                 navHostController = navController
             )
+            fabState(
+                FabState(
+                    displayName = "Map",
+                    route = "map-nearby-places"
+                )
+            ).also {
+                latHistory = null
+                lngHistory = null
+            }
         }
         composable(
             "search-loc/{lat}/{lng}",
@@ -45,13 +73,19 @@ fun MainNavHost(
                 navArgument("lng") { type = NavType.FloatType },
             ),
         ) { navBackStackEntry ->
-            val lat = navBackStackEntry.arguments?.getFloat("lat")
-            val lng = navBackStackEntry.arguments?.getFloat("lng")
+            latHistory = navBackStackEntry.arguments?.getFloat("lat")?.toDouble() ?: 0.0
+            lngHistory = navBackStackEntry.arguments?.getFloat("lng")?.toDouble() ?: 0.0
             SearchNearbyPlacesScreen(
                 modifier = Modifier.fillMaxSize(),
-                lat = lat?.toDouble() ?: 0.0,
-                lng = lng?.toDouble() ?: 0.0,
+                lat = latHistory,
+                lng = lngHistory,
                 navHostController = navController
+            )
+            fabState(
+                FabState(
+                    displayName = "Map",
+                    route = "map-nearby-places"
+                )
             )
         }
         composable(
@@ -60,17 +94,23 @@ fun MainNavHost(
             MapWithNearbyPlacesScreen(
                 modifier = Modifier.fillMaxSize(),
             )
+            if (queryHistory.isNullOrEmpty()) {
+                fabState(
+                    FabState(
+                        displayName = "List",
+                        route = "search-loc/$latHistory/$lngHistory"
+                    )
+                )
+            } else if ((latHistory == null) && (lngHistory == null)) {
+                fabState(
+                    FabState(
+                        displayName = "List",
+                        route = "search/$queryHistory"
+                    )
+                )
+            } else {
+               fabState(null)
+            }
         }
-//        composable(
-//            "details/{placeId}",
-//            listOf(navArgument("placeId") { type = NavType.StringType })
-//        ) { navBackStackEntry ->
-//            val placeId = navBackStackEntry.arguments?.getString("placeId") ?: ""
-//            Row(
-//                modifier = Modifier.fillMaxHeight()
-//            ) {
-//                Text("You clicked: $placeId")
-//            }
-//        }
     }
 }

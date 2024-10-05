@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
@@ -12,6 +13,7 @@
             <option value="$PROJECT_DIR$/common" />
             <option value="$PROJECT_DIR$/datasource" />
             <option value="$PROJECT_DIR$/domain" />
+            <option value="$PROJECT_DIR$/ui_feature_map_nearby_places" />
             <option value="$PROJECT_DIR$/ui_feature_search_nearby_places" />
           </set>
         </option>

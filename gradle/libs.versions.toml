@@ -20,6 +20,7 @@ logging-intereceptor = "4.12.0"
 mockitoCore = "5.12.0"
 mockitoKotlin = "5.4.0"
 mockk = "1.13.12"
+playServicesLocation = "21.3.0"
 retrofit2 = "2.11.0"
 retrofit2KotlinxSerializationConverter = "1.0.0"
 secretsGradlePluginVersion = "2.0.1"
@@ -50,6 +51,7 @@ junit = { group = "junit", name = "junit", version.ref = "junit" }
 logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "logging-intereceptor" }
 kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin"}
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
+play-services-location = { module = "com.google.android.gms:play-services-location", version.ref = "playServicesLocation" }
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit2"}
 retrofit-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit2" }
 retrofit-serialization = { module = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter", version.ref = "retrofit2KotlinxSerializationConverter" }
