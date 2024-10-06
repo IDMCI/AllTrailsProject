@@ -30,22 +30,16 @@ class SearchNearbyPlacesViewModel @Inject constructor(
     }
 
     init {
-        val query: String? = savedStateHandle["query"]
-        val _lat: Float? = savedStateHandle["lat"]
-        val _lng: Float? = savedStateHandle["lng"]
+        // There is not a "NavType.Double" to check for in navArguments.
+        val lat: Float? = savedStateHandle["lat"]
+        val lng: Float? = savedStateHandle["lng"]
 
-        // TODO DC: Add permission logic to get current location
-        when {
-            query != null -> searchByText(query)
-            (_lat != null) && (_lng != null) -> {
-                val lat = _lat.toDouble()
-                val lng = _lng.toDouble()
-                searchByLocation(lat, lng)
-            }
+        if((lat != null) && (lng != null)) {
+            searchByLocation(lat.toDouble(), lng.toDouble())
         }
     }
 
-    fun searchByLocation(
+    private fun searchByLocation(
         lat: Double,
         lng: Double,
     ) {

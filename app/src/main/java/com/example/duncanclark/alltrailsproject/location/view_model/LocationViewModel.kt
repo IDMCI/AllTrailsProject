@@ -64,11 +64,6 @@ class LocationViewModel @Inject constructor(
             _permissionGranted.value = isGranted
             _showPermissionDialog.value = false
             getLocation(activity)
-//            if (isGranted) {
-                // Start the location service
-//                val intent = Intent(application, LocationService::class.java)
-//                application.startService(intent)
-//            }
         }
     }
 
