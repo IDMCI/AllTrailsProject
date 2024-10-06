@@ -27,11 +27,11 @@ fun LocationScreen(
     val permissionGranted by viewModel.permissionGranted.collectAsStateWithLifecycle()
     val location by viewModel.location.collectAsStateWithLifecycle()
 
-    viewModel.location.collectAsState()
-
     LaunchedEffect(location) {
         location?.let {
-            navController.navigate("search-loc/${it.latitude}/${it.longitude}")
+            val lat: Float = it.latitude.toFloat()
+            val lng: Float = it.longitude.toFloat()
+            navController.navigate("search-loc/${lat}/${lng}")
         }
     }
 
@@ -44,25 +44,4 @@ fun LocationScreen(
             }
         )
     }
-
-//    Column {
-//        Text("Fetching Location...")
-//    }
-//
-//        Column {
-//        Text(text = "Location Screen")
-//
-//        Button(onClick = { viewModel.openPermissionDialog() }) {
-//            Text("Request Coarse Location Permission")
-//        }
-//
-//        if (permissionGranted) {
-//            Text(text = "Permission Granted")
-//            location?.let {
-//                Text(text = "Location: ${it.latitude}, ${it.longitude}")
-//            }
-//        } else {
-//            Text(text = "Permission Not Granted")
-//        }
-//    }
 }

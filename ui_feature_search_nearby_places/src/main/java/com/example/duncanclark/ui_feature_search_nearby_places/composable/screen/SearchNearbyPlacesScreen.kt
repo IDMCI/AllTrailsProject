@@ -46,7 +46,7 @@ fun SearchNearbyPlacesScreen(
     ) {
         when {
             query != null -> viewModel.searchByText(query)
-            (lat != null) && (lng != null) -> viewModel.searchByLocation(lat, lng)
+//            (lat != null) && (lng != null) -> viewModel.searchByLocation(lat, lng)
             else -> return@LaunchedEffect
         }
     }

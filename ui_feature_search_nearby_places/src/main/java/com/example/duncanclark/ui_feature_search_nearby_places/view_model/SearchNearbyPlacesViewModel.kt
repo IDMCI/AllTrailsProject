@@ -31,13 +31,17 @@ class SearchNearbyPlacesViewModel @Inject constructor(
 
     init {
         val query: String? = savedStateHandle["query"]
-        val lat: Double? = savedStateHandle["lat"]
-        val lng: Double? = savedStateHandle["lng"]
+        val _lat: Float? = savedStateHandle["lat"]
+        val _lng: Float? = savedStateHandle["lng"]
 
         // TODO DC: Add permission logic to get current location
         when {
             query != null -> searchByText(query)
-            (lat != null) && (lng != null) -> searchByLocation(lat, lng)
+            (_lat != null) && (_lng != null) -> {
+                val lat = _lat.toDouble()
+                val lng = _lng.toDouble()
+                searchByLocation(lat, lng)
+            }
         }
     }
 
