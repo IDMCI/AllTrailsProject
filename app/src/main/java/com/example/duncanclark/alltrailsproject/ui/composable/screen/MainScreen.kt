@@ -1,5 +1,8 @@
 package com.example.duncanclark.alltrailsproject.ui.composable.screen
 
+import android.app.Activity
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
@@ -27,10 +30,12 @@ import com.example.duncanclark.alltrailsproject.ui.composable.component.SearchBa
 import com.example.duncanclark.alltrailsproject.ui.composable.screen.nav_host.MainNavHost
 import com.example.duncanclark.alltrailsproject.ui.model.FabState
 
+@RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    activity: Activity,
 ) {
     val navController = rememberNavController()
     var fabState by remember { mutableStateOf<FabState?>(null) }
@@ -63,9 +68,10 @@ fun MainScreen(
     ) { innerPadding ->
         Box(modifier.padding(innerPadding)) {
             MainNavHost(
-                Modifier.padding(top = 96.dp)
+                modifier = Modifier.padding(top = 96.dp)
                     .background(MaterialTheme.colorScheme.secondary),
-                navController
+                activity = activity,
+                navController = navController
             ) { updatedFabState ->
                 showFab = (updatedFabState != null)
                 fabState = updatedFabState

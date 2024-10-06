@@ -1,5 +1,8 @@
 package com.example.duncanclark.alltrailsproject.ui.composable.screen.nav_host
 
+import android.app.Activity
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -19,14 +22,17 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.example.duncanclark.alltrailsproject.location.ui.screen.LocationScreen
 import com.example.duncanclark.alltrailsproject.ui.model.FabState
 import com.example.duncanclark.ui_feature_map_nearby_places.composable.MapWithNearbyPlacesScreen
 import com.example.duncanclark.ui_feature_search_nearby_places.composable.screen.SearchNearbyPlacesScreen
 
+@RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @Composable
 fun MainNavHost(
     modifier: Modifier,
     navController: NavHostController,
+    activity: Activity,
     fabState: (FabState?) -> Unit
 ) {
     // TODO DC: Remove this logic here and cache data in Room instead.
@@ -37,15 +43,23 @@ fun MainNavHost(
     NavHost(
         modifier = modifier.fillMaxSize(),
         navController = navController,
-        startDestination = "permissions",
+        startDestination = "current-location",
+//        startDestination = "permissions",
     ) {
-        composable("permissions") {
-            SearchNearbyPlacesScreen(
-                modifier = Modifier,
-                navHostController = navController
+        composable("current-location") {
+            LocationScreen(
+                activity = activity,
+                navController = navController
             )
             fabState(null)
         }
+//        composable("permissions") {
+//            SearchNearbyPlacesScreen(
+//                modifier = Modifier,
+//                navHostController = navController
+//            )
+//            fabState(null)
+//        }
         composable("denied") {
             Box(
                 modifier = Modifier
@@ -70,6 +84,7 @@ fun MainNavHost(
                 query = queryHistory,
                 navHostController = navController
             )
+            // TODO DC: Figure out better pattern for Fab Toggle instead of using this callback
             fabState(
                 FabState(
                     displayName = "Map",
@@ -95,6 +110,7 @@ fun MainNavHost(
                 lng = lngHistory,
                 navHostController = navController
             )
+            // TODO DC: Figure out better pattern for Fab Toggle instead of using this callback
             fabState(
                 FabState(
                     displayName = "Map",
@@ -108,6 +124,7 @@ fun MainNavHost(
             MapWithNearbyPlacesScreen(
                 modifier = Modifier.fillMaxSize(),
             )
+            // TODO DC: Figure out better pattern for Fab Toggle instead of using this callback
             if (queryHistory.isNullOrEmpty()) {
                 fabState(
                     FabState(

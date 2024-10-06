@@ -1,4 +1,4 @@
-package com.example.duncanclark.common.ui.dialog
+package com.example.duncanclark.alltrailsproject.location.ui.dialog
 
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
@@ -6,9 +6,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
+// TODO DC: Improve pattern or remove
+
 @Composable
 fun LocationPermissionRationale(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     onDismiss: () -> Unit,
     onOkay: () -> Unit,
 )  {

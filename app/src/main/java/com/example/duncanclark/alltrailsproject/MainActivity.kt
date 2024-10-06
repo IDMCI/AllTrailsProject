@@ -2,12 +2,14 @@ package com.example.duncanclark.alltrailsproject
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -22,6 +24,7 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -56,22 +59,19 @@ class MainActivity : ComponentActivity() {
                         )
                     }
                 })
-            val scope = rememberCoroutineScope()
 
             AllTrailsProjectTheme {
                 if (shouldShowPermissionRationale) {
                     LaunchedEffect(Unit) {
-                        scope.launch {
                             locationPermissionLauncher.launch(locationPermissions)
-                        }
                     }
                 } else {
-                    MainScreen()
+                    MainScreen(activity = this)
                 }
             }
         }
     }
-
+    // TODO DC: Move this logic out for separation of concerns.
     private fun decideCurrentPermissionStatus(
         locationPermissionsGranted: Boolean,
         shouldShowPermissionRationale: Boolean
