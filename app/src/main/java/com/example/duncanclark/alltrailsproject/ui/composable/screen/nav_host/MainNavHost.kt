@@ -23,9 +23,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.example.duncanclark.alltrailsproject.location.ui.screen.LocationScreen
-import com.example.duncanclark.alltrailsproject.ui.model.FabState
-import com.example.duncanclark.ui_feature_map_nearby_places.composable.MapWithNearbyPlacesScreen
-import com.example.duncanclark.ui_feature_search_nearby_places.composable.screen.SearchNearbyPlacesScreen
+import com.example.duncanclark.domain.model.route.FabState
+import com.example.duncanclark.domain.model.route.SearchResult
+import com.example.duncanclark.ui_feature_search_nearby_places.composable.screen.SearchResultScreen
 
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @Composable
@@ -50,7 +50,7 @@ fun MainNavHost(
                 activity = activity,
                 navController = navController
             )
-            fabState(null)
+//            fabState(null)
         }
         composable("denied") {
             Box(
@@ -71,21 +71,20 @@ fun MainNavHost(
             listOf(navArgument("query") { type = NavType.StringType })
         ) { navBackStackEntry ->
             queryHistory = navBackStackEntry.arguments?.getString("query") ?: ""
-            SearchNearbyPlacesScreen(
+            SearchResultScreen(
                 modifier = Modifier.fillMaxSize(),
                 query = queryHistory,
-                navHostController = navController
             )
-            // TODO DC: Refactor this to use navController.currentBackStackEntry?.destination?.route
-            fabState(
-                FabState(
-                    displayName = "Map",
-                    route = "map-nearby-places"
-                )
-            ).also {
-                latHistory = null
-                lngHistory = null
-            }
+//            // TODO DC: Refactor this to use navController.currentBackStackEntry?.destination?.route
+//            fabState(
+//                FabState(
+//                    displayName = "Map",
+//                    route = "map"
+//                )
+//            ).also {
+//                latHistory = null
+//                lngHistory = null
+//            }
         }
         composable(
             "search-loc/{lat}/{lng}",
@@ -96,42 +95,61 @@ fun MainNavHost(
         ) { navBackStackEntry ->
             latHistory = navBackStackEntry.arguments?.getFloat("lat")?.toDouble() ?: 0.0
             lngHistory = navBackStackEntry.arguments?.getFloat("lng")?.toDouble() ?: 0.0
-            SearchNearbyPlacesScreen(
+            SearchResultScreen(
                 modifier = Modifier.fillMaxSize(),
                 lat = latHistory,
                 lng = lngHistory,
-                navHostController = navController
             )
-            fabState(
-                FabState(
-                    displayName = "Map",
-                    route = "map-nearby-places"
-                )
-            )
+//            fabState(
+//                FabState(
+//                    displayName = "Map",
+//                    route = "map",
+//                    navCallBack = { navController.popBackStack() }
+//                )
+//            )
         }
+//        composable<RouteMapNearbyPlaces>(
+//            typeMap = mapOf(typeOf<SearchResults>() to CustomNavType.SearchResultsType)
+//        ) { navBackStackEntry ->
+//            navBackStackEntry.arguments?.getParcelable<C
+//            latHistory = navBackStackEntry.arguments?.getFloat("lat")?.toDouble() ?: 0.0
+//            MapWithNearbyPlacesScreen(
+//                modifier = Modifier.fillMaxSize(),
+//            )
         composable(
-            "map-nearby-places",
-        ) {
-            MapWithNearbyPlacesScreen(
-                modifier = Modifier.fillMaxSize(),
+            route = "map/{searchResults}",
+            arguments = listOf(
+                navArgument("searchResults") {
+                    type = NavType.ParcelableType(SearchResult::class.java)
+                }
             )
-            if (queryHistory.isNullOrEmpty()) {
-                fabState(
-                    FabState(
-                        displayName = "List",
-                        route = "search-loc/$latHistory/$lngHistory"
-                    )
-                )
-            } else if ((latHistory == null) && (lngHistory == null)) {
-                fabState(
-                    FabState(
-                        displayName = "List",
-                        route = "search/$queryHistory"
-                    )
-                )
-            } else {
-               fabState(null)
-            }
+        ) { navBackStackEntry ->
+            val results = navBackStackEntry.arguments?.getParcelable<SearchResult>("SearchResults")
+
+//            MapScreen(
+//                modifier = Modifier.fillMaxSize(),
+//                previousSearchResults = results,
+//            )
+//
+//            if (queryHistory.isNullOrEmpty()) {
+//                fabState(
+//                    FabState(
+//                        displayName = "List",
+//                        route = "search-loc/$latHistory/$lngHistory",
+//                        navCallBack = { navController.popBackStack() }
+//                    )
+//                )
+//            } else if ((latHistory == null) && (lngHistory == null)) {
+//                fabState(
+//                    FabState(
+//                        displayName = "List",
+//                        route = "search/$queryHistory",
+//                        navCallBack = { navController.popBackStack() }
+//                    )
+//                )
+//            } else {
+//               fabState(null)
+//            }
         }
     }
 }

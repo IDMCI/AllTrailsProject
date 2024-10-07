@@ -20,24 +20,26 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.NavHostController
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.duncanclark.common.ui.state.UiState
 import com.example.duncanclark.domain.model.ui.Place
 import com.example.duncanclark.ui_feature_search_nearby_places.composable.content.SearchNearbyPlacesResults
 import com.example.duncanclark.ui_feature_search_nearby_places.view_model.SearchNearbyPlacesViewModel
 
 @Composable
-fun SearchNearbyPlacesScreen(
+fun SearchResultScreen(
     modifier: Modifier,
     query: String? = null,
     lat: Double? = null,
     lng: Double? = null,
-    navHostController: NavHostController,
+    navController: NavController = rememberNavController(),
     viewModel: SearchNearbyPlacesViewModel = hiltViewModel(),
-) {
+    ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     var statusMessage by remember { mutableStateOf("") }
     var queryResult by remember { mutableStateOf(emptyList<Place>()) }
+    var showFab by remember { mutableStateOf(true) }
 
     LaunchedEffect(
         query,
@@ -46,7 +48,6 @@ fun SearchNearbyPlacesScreen(
     ) {
         when {
             query != null -> viewModel.searchByText(query)
-//            (lat != null) && (lng != null) -> viewModel.searchByLocation(lat, lng)
             else -> return@LaunchedEffect
         }
     }
@@ -85,9 +86,10 @@ fun SearchNearbyPlacesScreen(
             }
         }
     }
-    if(statusMessage.isNotEmpty()) {
+    if (statusMessage.isEmpty() && queryResult.isNotEmpty()) {
         Column(
             modifier = modifier
+                .padding()
                 .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center

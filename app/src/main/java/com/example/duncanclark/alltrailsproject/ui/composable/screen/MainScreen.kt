@@ -28,7 +28,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.duncanclark.alltrailsproject.ui.composable.component.MapsToSearchFloatingActionButton
 import com.example.duncanclark.alltrailsproject.ui.composable.component.SearchBar
 import com.example.duncanclark.alltrailsproject.ui.composable.screen.nav_host.MainNavHost
-import com.example.duncanclark.alltrailsproject.ui.model.FabState
+import com.example.duncanclark.domain.model.route.FabState
 
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @OptIn(ExperimentalMaterial3Api::class)
@@ -43,28 +43,23 @@ fun MainScreen(
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-        topBar = {
-            TopAppBar(
-                title = { Text("AllTrails @ Lunch") }
-            )
-        },
-        floatingActionButton = {
-            AnimatedVisibility(
-                visible = showFab,
-                enter = fadeIn(animationSpec = tween(durationMillis = 2000)),
-                exit = fadeOut(animationSpec = tween(durationMillis = 2000))
-            ) {
-                MapsToSearchFloatingActionButton(
-                    modifier = Modifier,
-                    fabState = fabState
-                ) {
-                    fabState?.let {
-                        showFab = true
-                        navController.navigate(it.route)
-                    }
-                }
-            }
-        }
+//        floatingActionButton = {
+//            AnimatedVisibility(
+//                visible = showFab,
+//                enter = fadeIn(animationSpec = tween(durationMillis = 2000)),
+//                exit = fadeOut(animationSpec = tween(durationMillis = 2000))
+//            ) {
+//                MapsToSearchFloatingActionButton(
+//                    modifier = Modifier,
+//                    fabState = fabState
+//                ) {
+//                    fabState?.let {
+//                        showFab = true
+//                        navController.navigate(it.route)
+//                    }
+//                }
+//            }
+//        }
     ) { innerPadding ->
         Box(modifier.padding(innerPadding)) {
             MainNavHost(

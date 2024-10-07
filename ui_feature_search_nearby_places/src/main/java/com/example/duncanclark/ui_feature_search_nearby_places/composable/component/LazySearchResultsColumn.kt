@@ -11,18 +11,19 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.duncanclark.domain.model.ui.Place
+import com.example.duncanclark.domain.model.ui.Places
 
 @Composable
 fun LazySearchResultsColumn(
     modifier: Modifier,
-    places: List<Place>,
+    queryResult: Places,
 ) {
     var selectedPlaceId by remember { mutableStateOf("") }
 
     LazyColumn(
         modifier = modifier
     ) {
-        items(places) { place ->
+        items(queryResult) { place ->
             when (place) {
                 is Place.LunchPlace -> {
                     RestaurantSearchResultsRow(
