@@ -9,7 +9,7 @@ data class Place(
     val rating: Double?,
     val displayName: DisplayName,
     val primaryTypeDisplayName: PrimaryTypeDisplayName,
-    val formattedAddress: String,
+    val formattedAddress: String?,
     val allowsDogs: Boolean,
     val servesVegetarianFood: Boolean,
     val servesLunch: Boolean?, // Only returned on NearbyPlaces

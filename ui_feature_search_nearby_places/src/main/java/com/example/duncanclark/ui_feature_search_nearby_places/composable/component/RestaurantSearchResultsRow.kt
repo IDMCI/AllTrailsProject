@@ -37,11 +37,12 @@ fun RestaurantSearchResultsRow(
                 .padding(12.dp)
                 .animateContentSize()
         ) {
-            Text(
-                text = place.placeId,
-                fontSize = 16.sp,
-                color = MaterialTheme.colorScheme.onPrimaryContainer
-            )
+            // Debugging purposes
+//            Text(
+//                text = place.placeId,
+//                fontSize = 16.sp,
+//                color = MaterialTheme.colorScheme.onPrimaryContainer
+//            )
             // Display name
             Text(
                 text = place.displayName,
@@ -50,29 +51,45 @@ fun RestaurantSearchResultsRow(
                 color = MaterialTheme.colorScheme.onPrimaryContainer
             )
             // Ratings & Reviews
-            Row(
-                modifier = Modifier.semantics(mergeDescendants = true) {}
-            ) {
-                Text(
-                    text = "★ ${place.rating} • ",
-                    style = MaterialTheme.typography.bodyMedium,
-                    fontWeight = FontWeight.SemiBold,
-                    fontSize = 13.sp,
-                    color = MaterialTheme.colorScheme.onPrimaryContainer
-                )
+            Text(
+                text = "★ ${place.rating} • ${place.primaryType}",
+                style = MaterialTheme.typography.bodyMedium,
+                fontWeight = FontWeight.SemiBold,
+                fontSize = 13.sp,
+                color = MaterialTheme.colorScheme.onPrimaryContainer
+            )
+            if (isSelected) {
+                place.formattedAddress?.let {
+                    Text(
+                        modifier = Modifier.padding(horizontal = 2.dp),
+                        text = "Address: ${place.formattedAddress}",
+                        style = MaterialTheme.typography.bodyMedium,
+                        fontWeight = FontWeight.Medium,
+                        fontSize = 13.sp,
+                        color = MaterialTheme.colorScheme.onPrimaryContainer
+                    )
+                }
+                place.servesLunch?.let {
+                    Text(
+                        modifier = Modifier.padding(horizontal = 2.dp),
+                        text = "listed as serving lunch: ${place.servesLunch}",
+                        style = MaterialTheme.typography.bodyMedium,
+                        fontWeight = FontWeight.Light,
+                        fontSize = 13.sp,
+                        color = MaterialTheme.colorScheme.onPrimaryContainer
+                    )
+                }
                 Text(
                     modifier = Modifier.padding(horizontal = 2.dp),
-                    text = "(reviews)",
+                    text = "vegetarian options: ${place.servesVegetarianFood}",
                     style = MaterialTheme.typography.bodyMedium,
                     fontWeight = FontWeight.Light,
                     fontSize = 13.sp,
                     color = MaterialTheme.colorScheme.onPrimaryContainer
                 )
-            }
-            if (isSelected) {
                 Text(
                     modifier = Modifier.padding(horizontal = 2.dp),
-                    text = "{supporting text}",
+                    text = "allows dogs: ${place.allowsDogs}",
                     style = MaterialTheme.typography.bodyMedium,
                     fontWeight = FontWeight.Light,
                     fontSize = 13.sp,

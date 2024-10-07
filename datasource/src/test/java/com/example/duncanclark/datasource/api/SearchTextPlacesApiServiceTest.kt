@@ -5,6 +5,7 @@ import com.example.duncanclark.datasource.api.builders.RetrofitBuildersForTestin
 import com.example.duncanclark.datasource.model.DisplayName
 import com.example.duncanclark.datasource.model.Place
 import com.example.duncanclark.datasource.model.PlacesResponse
+import com.example.duncanclark.datasource.model.PrimaryTypeDisplayName
 import com.example.duncanclark.domain.model.params.BodyParamsForSearchText
 import com.example.duncanclark.domain.model.params.Center
 import com.example.duncanclark.domain.model.params.Circle
@@ -58,6 +59,13 @@ class SearchTextPlacesApiServiceTest {
                     displayName = DisplayName(
                         text = "McDonald's",
                         languageCode = "en"
+                    ),
+                    allowsDogs = false,
+                    servesVegetarianFood = false,
+                    formattedAddress = null,
+                    primaryTypeDisplayName = PrimaryTypeDisplayName(
+                        "Fast Food Restaurant",
+                        "en-US"
                     )
                 )
             )
