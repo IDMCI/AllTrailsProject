@@ -15,7 +15,7 @@ class LunchPlacesMapperImpl @Inject constructor(): Mapper<PlacesResponse, LunchP
                 placeId = place.name,
                 displayName = place.displayName.text,
                 primaryType = place.primaryTypeDisplayName.text,
-                formattedAddress = place.formattedAddress,
+                formattedAddress = place.formattedAddress ?: "",
                 rating = place.rating,
                 servesLunch = place.servesLunch,
                 languageCode = place.displayName.languageCode,

@@ -6,8 +6,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import javax.inject.Inject
 
-// TODO DC: Need to fix the Activity injection otherwise remove
-//
 class PermissionHandler @Inject constructor() {
 
     fun requestPermission(

@@ -11,8 +11,6 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-// TODO DC: Improve pattern or remove
-
 @AndroidEntryPoint
 class LocationService : Service() {
 

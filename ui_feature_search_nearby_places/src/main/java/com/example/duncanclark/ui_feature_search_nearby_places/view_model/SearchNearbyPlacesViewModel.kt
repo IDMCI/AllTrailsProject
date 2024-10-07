@@ -1,7 +1,6 @@
 package com.example.duncanclark.ui_feature_search_nearby_places.view_model
 
 import android.app.Activity
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
@@ -14,8 +13,6 @@ import com.example.duncanclark.domain.usecase.GetNearbyPlacesLunchUseCaseImpl
 import com.example.duncanclark.domain.usecase.SearchTextLunchUseCaseImpl
 import com.example.duncanclark.ui_feature_search_nearby_places.composable.content.getLatLngFromAddress
 import com.google.android.gms.maps.model.LatLng
-import com.google.maps.android.compose.Marker
-import com.google.maps.android.compose.rememberMarkerState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

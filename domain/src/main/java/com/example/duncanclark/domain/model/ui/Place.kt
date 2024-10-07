@@ -14,7 +14,7 @@ sealed class Place: BasePlace, Parcelable {
         override val placeId: PlaceId,
         override val displayName: String,
         val primaryType: String,
-        override val formattedAddress: String?,
+        override val formattedAddress: String,
         val rating: Double?,
         val servesLunch: Boolean?,
         override val languageCode: String?,
@@ -27,7 +27,7 @@ sealed class Place: BasePlace, Parcelable {
 internal interface BasePlace {
     val placeId: PlaceId
     val displayName: String
-    val formattedAddress: String?
+    val formattedAddress: String
     val languageCode: String?
     val isSelected: Boolean
 }

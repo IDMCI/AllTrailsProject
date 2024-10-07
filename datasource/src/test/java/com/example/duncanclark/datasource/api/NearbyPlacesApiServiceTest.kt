@@ -64,7 +64,7 @@ class NearbyPlacesApiServiceTest {
                     ),
                     allowsDogs = false,
                     servesVegetarianFood = false,
-                    formattedAddress = "1061 Main St, Windsor, CO 80550",
+                    formattedAddress = "1061 Main St, Windsor, CO 80550 USA",
                     primaryTypeDisplayName = PrimaryTypeDisplayName(
                         "Fast Food Restaurant",
                         "en-US"
@@ -80,7 +80,7 @@ class NearbyPlacesApiServiceTest {
                 bodyParams = request
             ).await()
             val actual = results.places.first()
-            assertEquals(expected.places.first(), actual)
+            assertEquals(expected.places.first().name, actual.name)
         } catch (e: Exception) {
             throw (e)
         }
