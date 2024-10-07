@@ -34,7 +34,6 @@ import com.google.maps.android.compose.rememberMarkerState
 fun MapContent(
     modifier: Modifier,
     queryResult: Places,
-    showFabCallBack: (Boolean) -> Unit
 ) {
     var lat = 40.48476274565125
     val home = LatLng(40.48532123373319, -104.93347283804225)
@@ -46,7 +45,6 @@ fun MapContent(
 
     val other = LatLng(40.48514568460747, -104.92020959933022)
     val other2 = LatLng(40.477409485867724, -104.9418818468041)
-    showFabCallBack(mapHasLoaded)
     val myList = listOf(other, other2, home)
 //    val searchResult = previousSearchResults?.places?.first()
 //    val searchResult2 = previousSearchResults?.places?.last()
