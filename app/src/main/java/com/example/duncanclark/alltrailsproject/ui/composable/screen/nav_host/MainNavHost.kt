@@ -44,7 +44,6 @@ fun MainNavHost(
         modifier = modifier.fillMaxSize(),
         navController = navController,
         startDestination = "current-location",
-//        startDestination = "permissions",
     ) {
         composable("current-location") {
             LocationScreen(
@@ -53,13 +52,6 @@ fun MainNavHost(
             )
             fabState(null)
         }
-//        composable("permissions") {
-//            SearchNearbyPlacesScreen(
-//                modifier = Modifier,
-//                navHostController = navController
-//            )
-//            fabState(null)
-//        }
         composable("denied") {
             Box(
                 modifier = Modifier
@@ -84,7 +76,7 @@ fun MainNavHost(
                 query = queryHistory,
                 navHostController = navController
             )
-            // TODO DC: Figure out better pattern for Fab Toggle instead of using this callback
+            // TODO DC: Refactor this to use navController.currentBackStackEntry?.destination?.route
             fabState(
                 FabState(
                     displayName = "Map",
@@ -110,7 +102,6 @@ fun MainNavHost(
                 lng = lngHistory,
                 navHostController = navController
             )
-            // TODO DC: Figure out better pattern for Fab Toggle instead of using this callback
             fabState(
                 FabState(
                     displayName = "Map",
@@ -120,11 +111,10 @@ fun MainNavHost(
         }
         composable(
             "map-nearby-places",
-        ) { navBackStackEntry ->
+        ) {
             MapWithNearbyPlacesScreen(
                 modifier = Modifier.fillMaxSize(),
             )
-            // TODO DC: Figure out better pattern for Fab Toggle instead of using this callback
             if (queryHistory.isNullOrEmpty()) {
                 fabState(
                     FabState(
