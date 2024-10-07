@@ -83,7 +83,6 @@ dependencies {
     implementation(project(":domain"))
     implementation(project(":datasource"))
     implementation(project(":ui_feature_search_nearby_places"))
-    implementation(project(":ui_feature_map_nearby_places"))
 
     implementation(libs.dagger.hilt)
     ksp(libs.dagger.hilt.compiler)

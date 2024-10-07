@@ -23,8 +23,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.example.duncanclark.alltrailsproject.location.ui.screen.LocationScreen
-import com.example.duncanclark.domain.model.route.FabState
-import com.example.duncanclark.domain.model.route.SearchResult
 import com.example.duncanclark.ui_feature_search_nearby_places.composable.screen.SearchResultScreen
 
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
@@ -33,7 +31,6 @@ fun MainNavHost(
     modifier: Modifier,
     navController: NavHostController,
     activity: Activity,
-    fabState: (FabState?) -> Unit
 ) {
     // TODO DC: Remove this logic here and cache data in Room instead.
     var queryHistory by remember { mutableStateOf<String?>(null) }
@@ -50,7 +47,6 @@ fun MainNavHost(
                 activity = activity,
                 navController = navController
             )
-//            fabState(null)
         }
         composable("denied") {
             Box(
@@ -75,16 +71,6 @@ fun MainNavHost(
                 modifier = Modifier.fillMaxSize(),
                 query = queryHistory,
             )
-//            // TODO DC: Refactor this to use navController.currentBackStackEntry?.destination?.route
-//            fabState(
-//                FabState(
-//                    displayName = "Map",
-//                    route = "map"
-//                )
-//            ).also {
-//                latHistory = null
-//                lngHistory = null
-//            }
         }
         composable(
             "search-loc/{lat}/{lng}",
@@ -100,56 +86,6 @@ fun MainNavHost(
                 lat = latHistory,
                 lng = lngHistory,
             )
-//            fabState(
-//                FabState(
-//                    displayName = "Map",
-//                    route = "map",
-//                    navCallBack = { navController.popBackStack() }
-//                )
-//            )
-        }
-//        composable<RouteMapNearbyPlaces>(
-//            typeMap = mapOf(typeOf<SearchResults>() to CustomNavType.SearchResultsType)
-//        ) { navBackStackEntry ->
-//            navBackStackEntry.arguments?.getParcelable<C
-//            latHistory = navBackStackEntry.arguments?.getFloat("lat")?.toDouble() ?: 0.0
-//            MapWithNearbyPlacesScreen(
-//                modifier = Modifier.fillMaxSize(),
-//            )
-        composable(
-            route = "map/{searchResults}",
-            arguments = listOf(
-                navArgument("searchResults") {
-                    type = NavType.ParcelableType(SearchResult::class.java)
-                }
-            )
-        ) { navBackStackEntry ->
-            val results = navBackStackEntry.arguments?.getParcelable<SearchResult>("SearchResults")
-
-//            MapScreen(
-//                modifier = Modifier.fillMaxSize(),
-//                previousSearchResults = results,
-//            )
-//
-//            if (queryHistory.isNullOrEmpty()) {
-//                fabState(
-//                    FabState(
-//                        displayName = "List",
-//                        route = "search-loc/$latHistory/$lngHistory",
-//                        navCallBack = { navController.popBackStack() }
-//                    )
-//                )
-//            } else if ((latHistory == null) && (lngHistory == null)) {
-//                fabState(
-//                    FabState(
-//                        displayName = "List",
-//                        route = "search/$queryHistory",
-//                        navCallBack = { navController.popBackStack() }
-//                    )
-//                )
-//            } else {
-//               fabState(null)
-//            }
         }
     }
 }
