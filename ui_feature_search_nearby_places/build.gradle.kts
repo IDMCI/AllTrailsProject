@@ -57,8 +57,11 @@ dependencies {
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.tooling.preview)
-//    implementation(libs.google.maps)
-    implementation(libs.google.maps.compse)
+    implementation(libs.google.maps.gms)
+    implementation(libs.google.maps.compose)
+    implementation(libs.play.services.location)
+    implementation(libs.compose.runtime)
+    implementation(libs.compose.runtime.livedata)
 
     implementation(libs.androidx.hilt.navigation)
 

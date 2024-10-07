@@ -7,7 +7,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -18,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.key.Key
 import androidx.compose.ui.input.key.key
 import androidx.compose.ui.input.key.onPreviewKeyEvent
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
@@ -29,6 +32,7 @@ fun SearchBar(
     onSearch: (String) -> Unit
 ) {
     var query by remember { mutableStateOf("") }
+    val focusManager = LocalFocusManager.current
 
     Column(
         modifier = modifier.padding(bottom = 12.dp)
@@ -43,7 +47,10 @@ fun SearchBar(
                 .onPreviewKeyEvent {
                     // Handles wired keyboards
                     if (it.key == Key.Enter && it.nativeKeyEvent.action == ACTION_DOWN) {
-                        if (query.isNotEmpty()) { onSearch(query) }
+                        if (query.isNotEmpty()) {
+                            onSearch(query)
+                            focusManager.clearFocus()
+                        }
                         true
                     } else {
                         false
@@ -54,8 +61,15 @@ fun SearchBar(
             keyboardActions = KeyboardActions(onSearch = {
                 if (query.isNotEmpty()) {
                     onSearch(query)
+                    focusManager.clearFocus()
                 }
-            })
+            }),
+            colors = OutlinedTextFieldDefaults.colors(
+                unfocusedBorderColor = MaterialTheme.colorScheme.secondary,
+                focusedBorderColor = MaterialTheme.colorScheme.secondary,
+                focusedLabelColor = MaterialTheme.colorScheme.secondary,
+                cursorColor = MaterialTheme.colorScheme.tertiary,
+            )
         )
     }
 }

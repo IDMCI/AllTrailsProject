@@ -1,12 +1,12 @@
 package com.example.duncanclark.domain.mapper
 
 import com.example.duncanclark.domain.common.mapper.Mapper
+import com.example.duncanclark.domain.model.params.BodyParamsForNearbyPlaces
 import com.example.duncanclark.domain.model.params.Center
 import com.example.duncanclark.domain.model.params.Circle
 import com.example.duncanclark.domain.model.params.FieldMask
 import com.example.duncanclark.domain.model.params.IncludedType
 import com.example.duncanclark.domain.model.params.LocationRestriction
-import com.example.duncanclark.domain.model.params.BodyParamsForNearbyPlaces
 import com.example.duncanclark.domain.model.params.ParamsForNearbyPlaces
 import com.example.duncanclark.domain.model.params.nearbyPlacesForLunch
 import javax.inject.Inject

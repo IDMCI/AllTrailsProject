@@ -5,7 +5,6 @@ import com.example.duncanclark.datasource.api.SearchTextPlacesApiService
 import com.example.duncanclark.datasource.mapper.LunchPlacesMapperImpl
 import com.example.duncanclark.datasource.remote.NearbyPlacesApiDataSource
 import com.example.duncanclark.datasource.remote.NearbyPlacesApiDataSourceImpl
-import com.example.duncanclark.datasource.remote.SearchTextApiDataSource
 import com.example.duncanclark.datasource.remote.SearchTextApiDataSourceImpl
 import com.example.duncanclark.datasource.repository.NearbyPlacesRepositoryImpl
 import com.example.duncanclark.datasource.repository.SearchTextPlacesRepositoryImpl
