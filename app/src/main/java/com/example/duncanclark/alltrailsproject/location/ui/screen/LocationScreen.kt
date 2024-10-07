@@ -29,13 +29,10 @@ fun LocationScreen(
     activity: Activity,
     viewModel: LocationViewModel = hiltViewModel()
 ) {
-    val showDialog by viewModel.showPermissionDialog.collectAsStateWithLifecycle()
-    val permissionGranted by viewModel.permissionGranted.collectAsStateWithLifecycle()
     val location by viewModel.location.collectAsStateWithLifecycle()
 
     LaunchedEffect(location) {
         viewModel.requestPermission(activity)
-        viewModel.getLocation(activity)
         location?.let {
             val lat: Float = it.latitude.toFloat()
             val lng: Float = it.longitude.toFloat()
@@ -56,7 +53,7 @@ fun LocationScreen(
                     containerColor = MaterialTheme.colorScheme.onSecondary
                 ),
                 onClick = {
-                    viewModel.getLocation(activity)
+                    viewModel.requestPermission(activity)
                 }
             ) {
                 Text(

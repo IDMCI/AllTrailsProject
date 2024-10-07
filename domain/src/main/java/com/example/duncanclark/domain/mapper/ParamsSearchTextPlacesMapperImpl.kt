@@ -18,9 +18,10 @@ class ParamsSearchTextPlacesMapperImpl @Inject constructor()
             fieldMasks = FieldMask.nearbyPlacesForLunch(),
             bodyParams = BodyParamsForSearchText(
                 textQuery = input,
-                locationBias = createLocationRestriction(
-                    Pair(40.479822043320816,-104.89954079298904)
-                ),
+                locationBias = null
+//                locationBias = createLocationRestriction(
+//                    Pair(40.479822043320816,-104.89954079298904)
+//                ),
             )
         )
     }
