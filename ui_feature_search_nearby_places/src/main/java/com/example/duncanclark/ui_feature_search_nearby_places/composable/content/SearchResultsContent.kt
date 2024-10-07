@@ -1,5 +1,6 @@
 package com.example.duncanclark.ui_feature_search_nearby_places.composable.content
 
+import android.app.Activity
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
@@ -27,6 +28,7 @@ import com.example.duncanclark.ui_feature_search_nearby_places.composable.compon
 fun SearchNearbyPlacesResults(
     modifier: Modifier,
     queryResult: List<Place>,
+    activity: Activity,
 ) {
     var showFab by remember { mutableStateOf(true) }
     var showList by remember { mutableStateOf(true) }
@@ -68,6 +70,7 @@ fun SearchNearbyPlacesResults(
                 MapContent(
                     modifier = modifier.fillMaxSize(),
                     queryResult = queryResult,
+                    activity = activity,
                 )
             }
         }

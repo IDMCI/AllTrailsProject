@@ -1,5 +1,6 @@
 package com.example.duncanclark.ui_feature_search_nearby_places.composable.screen
 
+import android.app.Activity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -33,7 +34,7 @@ fun SearchResultScreen(
     query: String? = null,
     lat: Double? = null,
     lng: Double? = null,
-    navController: NavController = rememberNavController(),
+    activity: Activity,
     viewModel: SearchNearbyPlacesViewModel = hiltViewModel(),
     ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -82,6 +83,7 @@ fun SearchResultScreen(
                 SearchNearbyPlacesResults(
                     modifier = modifier,
                     queryResult = state.data,
+                    activity = activity,
                 )
             }
         }

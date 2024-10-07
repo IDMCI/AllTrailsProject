@@ -13,16 +13,21 @@ sealed class Place: BasePlace, Parcelable {
     data class LunchPlace(
         override val placeId: PlaceId,
         override val displayName: String,
+        val primaryType: String,
+        override val formattedAddress: String,
         val rating: Double?,
         val servesLunch: Boolean?,
         override val languageCode: String?,
         override val isSelected: Boolean = false,
+        val allowsDogs: Boolean?,
+        val servesVegetarianFood: Boolean?,
     ) : Place()
 }
 
 internal interface BasePlace {
     val placeId: PlaceId
     val displayName: String
+    val formattedAddress: String
     val languageCode: String?
     val isSelected: Boolean
 }

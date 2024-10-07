@@ -70,6 +70,7 @@ fun MainNavHost(
             SearchResultScreen(
                 modifier = Modifier.fillMaxSize(),
                 query = queryHistory,
+                activity = activity
             )
         }
         composable(
@@ -85,6 +86,7 @@ fun MainNavHost(
                 modifier = Modifier.fillMaxSize(),
                 lat = latHistory,
                 lng = lngHistory,
+                activity = activity,
             )
         }
     }

@@ -10,7 +10,7 @@ import com.example.duncanclark.domain.model.params.Center
 import com.example.duncanclark.domain.model.params.Circle
 import com.example.duncanclark.domain.model.params.FieldMask
 import com.example.duncanclark.domain.model.params.LocationRestriction
-import com.example.duncanclark.domain.model.params.searchTextForLunch
+import com.example.duncanclark.domain.model.params.smallerListExample
 import kotlinx.coroutines.test.runTest
 import okhttp3.OkHttpClient
 import org.junit.Assert.assertEquals
@@ -24,7 +24,7 @@ import retrofit2.await
 class SearchTextPlacesApiServiceTest {
 
     // Stub Data
-    private val fieldMasks = FieldMask.searchTextForLunch()
+    private val fieldMasks = FieldMask.smallerListExample()
     private val lat = 40.479822043320816
     private val lng = -104.89954079298904
     private val request = BodyParamsForSearchText(

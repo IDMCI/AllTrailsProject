@@ -5,6 +5,7 @@ androidxHiltNavigation = "1.2.0"
 androidxNavigation = "2.8.2"
 appcompat = "1.7.0"
 composeBom = "2024.09.03"
+runtime = "1.7.3"
 coreKtx = "1.13.1"
 coroutines-test = "1.9.0"
 devtoolsKsp = "2.0.20-1.0.25"
@@ -41,12 +42,14 @@ androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
+compose-runtime = { group = "androidx.compose.runtime", name = "runtime", version.ref = "runtime" }
+compose-runtime-livedata = { group = "androidx.compose.runtime", name = "runtime-livedata", version.ref = "runtime" }
 coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines-test" }
 dagger-hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 dagger-hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt"}
 dagger-hilt-gradle = { group = "com.google.dagger",  name = "hilt-android-gradle-plugin", version.ref = "hilt" }
-#google-maps = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "google-maps" }
-google-maps-compse = { group = "com.google.maps.android", name = "maps-compose", version.ref = "google-maps-compose" }
+google-maps-gms = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "google-maps" }
+google-maps-compose = { group = "com.google.maps.android", name = "maps-compose", version.ref = "google-maps-compose" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "logging-intereceptor" }
 kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin"}

@@ -19,9 +19,6 @@ class ParamsSearchTextPlacesMapperImpl @Inject constructor()
             bodyParams = BodyParamsForSearchText(
                 textQuery = input,
                 locationBias = null
-//                locationBias = createLocationRestriction(
-//                    Pair(40.479822043320816,-104.89954079298904)
-//                ),
             )
         )
     }
